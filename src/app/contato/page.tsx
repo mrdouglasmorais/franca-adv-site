@@ -5,7 +5,6 @@ import { PageBanner } from "@/components/site/page-banner";
 import { SocialLinks } from "@/components/site/social-links";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ContactForm } from "@/components/site/contact-form";
-import { OfficeStage } from "@/components/site/office-stage";
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -34,7 +33,6 @@ export default function ContactPage() {
       title="Fale com o escritório"
       line="Conte a demanda no formulário. A mensagem entra na fila, de segunda a sexta, das 8h às 18h."
     />
-    <OfficeStage />
     <Container className="py-16 md:py-24">
       <JsonLd data={breadcrumbSchema(crumbs)} />
       <Reveal className="max-w-[40rem]">

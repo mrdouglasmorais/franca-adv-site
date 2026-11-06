@@ -198,13 +198,14 @@
 }
 
 @keyframes drift {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: scale(1.06) translate3d(-1.2%, -0.6%, 0); }
+  from { transform: scale(1.12) translate3d(4%, 2.5%, 0); }
+  to { transform: scale(1.24) translate3d(-5.5%, -4%, 0); }
 }
 
 .hero-slide.is-on .hero-drift,
 .image-drift {
-  animation: drift 18s var(--ease-out) 1.2s alternate infinite;
+  transform-origin: center center;
+  animation: drift 9s linear alternate infinite;
 }
 
 .hero-caption {

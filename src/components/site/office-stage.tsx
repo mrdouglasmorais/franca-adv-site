@@ -49,9 +49,9 @@ export function OfficeStage() {
       <Container className="relative flex min-h-[inherit] flex-col justify-end gap-8 py-12 md:py-16">
         <div className="max-w-[46rem]">
           <Eyebrow tone="gold">Infraestrutura · {firm.address.city}/{firm.address.region}</Eyebrow>
-          <h2 id="escritorio-titulo" className="office-title">
+          <p id="escritorio-titulo" className="office-title">
             {slide.title}
-          </h2>
+          </p>
           <p className="mt-5 max-w-[42ch] text-lg text-gold-soft" aria-live="polite">
             {slide.line}
           </p>
