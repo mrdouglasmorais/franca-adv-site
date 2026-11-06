@@ -35,6 +35,9 @@ export function TeamGrid() {
             </div>
             <p className="team-name mt-4 font-display text-xl leading-tight font-medium tracking-tight">{member.name}</p>
             <p className="mt-1 text-sm text-ink-soft">{member.role}</p>
+            {member.curriculum?.focus.length ? (
+              <p className="mt-3 text-sm leading-5">{member.curriculum.focus.join(" · ")}</p>
+            ) : null}
             <p
               className="mt-1 min-h-4 text-xs tracking-[0.08em] text-ink-soft uppercase"
               aria-hidden={member.oab ? undefined : true}

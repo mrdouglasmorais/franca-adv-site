@@ -24,6 +24,7 @@ export type TeamMember = {
   role: string;
   oab?: string;
   summary: string;
+  paragraphs: readonly string[];
   photo?: string;
   curriculum?: Curriculum;
 };
@@ -37,6 +38,14 @@ export const team: readonly TeamMember[] = [
     photo: "/team/maicon.jpg",
     summary:
       "Fundador do escritório. Graduado em Direito e Administração pela UNIVALI, com pós-graduação em Direito Empresarial e Direito Civil.",
+    paragraphs: [
+      "Advogado e administrador de empresas, graduado pela Universidade do Vale do Itajaí (UNIVALI). A trajetória parte da integração entre Direito, gestão empresarial e estratégia jurídica.",
+      "Fundador da Ferreira França Advocacia e Assessoria Jurídica, conduz a advocacia e a gestão da sociedade. A atuação se concentra em Direito Criminal, Direito Civil e Direito Empresarial.",
+      "A formação em Direito e em Administração de Empresas liga a análise jurídica à estrutura e à dinâmica da empresa. Em cada demanda entram também os aspectos estratégicos, patrimoniais e negociais.",
+      "No segmento tributário, foi executivo de contas tributárias no Grupo Villela Advocacia Soluções Tributárias. Também respondeu pela gestão do departamento jurídico da Flash Vips.",
+      "A formação acadêmica inclui pós-graduação em Direito Empresarial e em Direito Civil, com cursos de extensão, fóruns, debates, mesas-redondas, palestras, conferências e congressos.",
+      "Como fundador e CEO, conduz o escritório e as demandas dos clientes com a experiência jurídica, o conhecimento empresarial e a gestão da sociedade.",
+    ],
     curriculum: {
       focus: ["Direito Criminal", "Direito Civil", "Direito Empresarial"],
       education: [
@@ -103,6 +112,12 @@ export const team: readonly TeamMember[] = [
     oab: "OAB/SC 061535-B",
     summary:
       "Advogada associada em Itajaí. Graduada pela ULBRA em 2005, com especialização em Direito Público, Direito Processual Penal e Direito Imobiliário.",
+    paragraphs: [
+      "Advogada associada em Itajaí. Graduou-se em Ciências Jurídicas e Sociais pela Universidade Luterana do Brasil (ULBRA), campus Gravataí/RS, em 2005.",
+      "Especializou-se em Direito Público pela Faculdade Projeção/DF, em 2007, e em Direito Processual Penal pelo Instituto de Desenvolvimento Cultural (IDC/RS), em 2014.",
+      "Complementa a formação com Direito Imobiliário na Universidade do Vale do Itajaí (UNIVALI), campus Itajaí.",
+      "No escritório, atua em Direito Imobiliário, Direito Processual Penal, Direito Público e Direito Civil.",
+    ],
     curriculum: {
       focus: ["Direito Imobiliário", "Direito Processual Penal", "Direito Público", "Direito Civil"],
       education: [
@@ -141,6 +156,13 @@ export const team: readonly TeamMember[] = [
     oab: "OAB/SC 075307",
     summary:
       "Advogada em Itajaí. Graduada pela UNIVALI em 2018, com pós-graduação em Direito Processual Civil e Direito Imobiliário.",
+    paragraphs: [
+      "Advogada em Itajaí. Graduou-se em Direito pela Universidade do Vale do Itajaí (UNIVALI) entre 2013 e 2018.",
+      "Concluiu pós-graduação em Direito Processual Civil pela UNIVALI, em 2019, e em Direito Imobiliário pelo Complexo Educacional Renato Saraiva (CERS), em 2021.",
+      "Em 2026, concluiu novas pós-graduações em Direito Processual Civil e em Direito Imobiliário na Gran Tecnologia e Educação. Cursa Direito Imobiliário na UNIVALI.",
+      "Durante a graduação, teve prática junto ao Tribunal de Justiça de Santa Catarina, em congressos de Direito Processual Civil, eventos técnico-científicos e projetos de extensão.",
+      "Atua em Direito Imobiliário, Direito Processual Civil e Direito Civil.",
+    ],
     curriculum: {
       focus: ["Direito Imobiliário", "Direito Processual Civil", "Direito Civil"],
       education: [
@@ -190,6 +212,13 @@ export const team: readonly TeamMember[] = [
     role: "Assistente jurídica",
     summary:
       "Assistente jurídica do escritório. Bacharel em Administração e pós-graduada em Gestão Pública. Cursa Direito na UNIASSELVI, em fase de conclusão.",
+    paragraphs: [
+      "Assistente jurídica do escritório. Cursa Direito no Centro Universitário Leonardo da Vinci (UNIASSELVI), em fase de conclusão.",
+      "É bacharel em Administração de Empresas pela UESSBA, em 2010, e pós-graduada em Gestão Pública pela mesma instituição, em 2012. Cursa Técnico em Transações Imobiliárias.",
+      "A formação complementar inclui oratória, vendas, atendimento e informática.",
+      "Reúne mais de 20 anos nas áreas administrativa, empresarial, comercial e imobiliária, em gestão, contratos, negociação, atendimento e análise documental. No mercado imobiliário, conduz negociação de compra, venda e locação.",
+      "No escritório, apoia Direito Civil, Direito Processual Civil, Direito Empresarial, Direito Imobiliário e Contratos.",
+    ],
     curriculum: {
       focus: [
         "Direito Civil",
@@ -242,6 +271,12 @@ export const team: readonly TeamMember[] = [
     name: "Sabrina Soares Melo",
     role: "Estagiária de Direito",
     summary: "Estagiária de Direito do escritório. Acadêmica de Direito na UNIASSELVI.",
+    paragraphs: [
+      "Estagiária de Direito do escritório. Cursa Direito no Centro Universitário Leonardo da Vinci (UNIASSELVI).",
+      "Concluiu o Técnico em Recursos Pesqueiros no Instituto Federal de Santa Catarina (IFSC), em 2019, com ensino médio integrado em administração, empreendedorismo, controle de qualidade e segurança do trabalho.",
+      "Entre 2022 e 2023, estagiou na Polícia Federal, no Posto de Emissão de Passaportes e Registro de Estrangeiros.",
+      "Antes de integrar a equipe, já acompanhava a rotina de um escritório de advocacia. Aqui, atua na prática jurídica, nas rotinas administrativas e no atendimento ao público.",
+    ],
     curriculum: {
       focus: ["Prática jurídica", "Rotinas administrativas", "Atendimento ao público"],
       education: [
@@ -279,6 +314,11 @@ export const team: readonly TeamMember[] = [
     role: "Jurídico",
     summary:
       "Integra a equipe jurídica do escritório, na área criminal. Bacharelando em Direito pela UNIASSELVI.",
+    paragraphs: [
+      "Integra a equipe jurídica do escritório, na área criminal. É bacharelando em Direito pelo Centro Universitário Leonardo da Vinci (UNIASSELVI).",
+      "Acompanha procedimentos e processos criminais, analisa documentos e faz pesquisa jurídica, legislativa e jurisprudencial.",
+      "A atuação cobre Direito Penal, Direito Processual Penal e a prática criminal.",
+    ],
     curriculum: {
       focus: ["Direito Penal", "Direito Processual Penal", "Prática criminal"],
       education: [
@@ -301,6 +341,7 @@ export const team: readonly TeamMember[] = [
     name: "Fabiana de Lima Berwanger",
     role: "Financeiro",
     summary: "Cuida da área financeira do escritório.",
+    paragraphs: ["Cuida da área financeira do escritório em Itajaí."],
   },
 ];
 

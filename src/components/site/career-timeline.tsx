@@ -7,7 +7,47 @@ const marks: Record<string, string> = {
   "Direito Civil": "CIV",
   "Direito Criminal": "CRI",
   "Direito Empresarial": "EMP",
+  "Direito Imobiliário": "IMO",
+  "Direito Penal": "PEN",
+  "Direito Processual Civil": "PPC",
+  "Direito Processual Penal": "PPP",
+  "Direito Público": "PUB",
+  Contratos: "CTO",
+  "Prática criminal": "PCR",
+  "Prática jurídica": "PRJ",
+  "Rotinas administrativas": "ADM",
+  "Atendimento ao público": "ATD",
 };
+
+export function FocusFlags({ names }: { names: readonly string[] }) {
+  return (
+    <ul className="mt-4 flex flex-wrap gap-2" aria-label="Atuação">
+      {names.map((name) => {
+        const area = practiceAreas.find((item) => item.name === name);
+        const code = marks[name] ?? name.replace(/^Direito (do |de |das |dos )?/i, "").slice(0, 3).toUpperCase();
+        const body = (
+          <>
+            <span className="focus-flag-mark" aria-hidden="true">
+              {code}
+            </span>
+            {name}
+          </>
+        );
+        return (
+          <li key={name} className="focus-flag-item">
+            {area ? (
+              <Link href={`/areas/${area.slug}`} className="focus-flag">
+                {body}
+              </Link>
+            ) : (
+              <span className="focus-flag">{body}</span>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 function entryKey(item: CurriculumEntry) {
   return `${item.period ?? ""}-${item.title}-${item.detail ?? ""}`;
@@ -67,34 +107,12 @@ export function CareerTimeline({ curriculum, slug }: { curriculum: Curriculum; s
           <Chapter key={chapter.title} title={chapter.title} items={chapter.items} />
         ))}
       </div>
-      <div className="mt-16">
-        <Heading level={3}>Atuação</Heading>
-        <ul className="mt-6 flex flex-wrap gap-2">
-          {curriculum.focus.map((name) => {
-            const area = practiceAreas.find((item) => item.name === name);
-            const code = marks[name] ?? name.replace(/^Direito (do |de |das |dos )?/i, "").slice(0, 3).toUpperCase();
-            const body = (
-              <>
-                <span className="focus-flag-mark" aria-hidden="true">
-                  {code}
-                </span>
-                {name}
-              </>
-            );
-            return (
-              <li key={name} className="focus-flag-item">
-                {area ? (
-                  <Link href={`/areas/${area.slug}`} className="focus-flag">
-                    {body}
-                  </Link>
-                ) : (
-                  <span className="focus-flag">{body}</span>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      {curriculum.focus.length > 0 ? (
+        <div className="mt-16">
+          <Heading level={3}>Atuação</Heading>
+          <FocusFlags names={curriculum.focus} />
+        </div>
+      ) : null}
     </section>
   );
 }
