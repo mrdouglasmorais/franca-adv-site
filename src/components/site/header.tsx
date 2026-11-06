@@ -2,16 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { firm } from "@/content/firm";
 import { Container } from "@/components/ui/container";
+import { HeaderShell } from "@/components/site/header-shell";
 import { SiteNav } from "@/components/site/site-nav";
 
 export function Header() {
   return (
-    <header
-      id="topo"
-      className="sticky top-0 z-50 border-b border-line-light bg-ink text-paper"
-      style={{ viewTransitionName: "site-header" }}
-    >
-      <Container className="relative z-10 flex h-(--header-height) items-center justify-between gap-4">
+    <HeaderShell>
+      <Container className="header-cluster relative z-10 flex h-(--header-height) items-center justify-between gap-4">
         <Link href="/" className="flex min-w-0 items-center gap-3" aria-label={firm.shortName}>
           <Image
             src={firm.assets.brasao}
@@ -34,6 +31,6 @@ export function Header() {
         </Link>
         <SiteNav />
       </Container>
-    </header>
+    </HeaderShell>
   );
 }

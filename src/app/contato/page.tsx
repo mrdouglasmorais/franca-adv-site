@@ -6,6 +6,7 @@ import { PageBanner } from "@/components/site/page-banner";
 import { SocialLinks } from "@/components/site/social-links";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ContactForm } from "@/components/site/contact-form";
+import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading } from "@/components/ui/heading";
@@ -38,9 +39,11 @@ export default function ContactPage() {
       <p className="mt-4 max-w-[62ch] text-ink-soft">
         Conte a demanda no formulário. A mensagem entra na fila, de segunda a sexta, das 8h às 18h.
       </p>
-      <div id="formulario" className="mt-10 max-w-[40rem] border-t border-line pt-10">
-        <ContactForm />
-      </div>
+      <Reveal className="mt-10 max-w-[40rem]">
+        <div id="formulario">
+          <ContactForm title="Sua mensagem" />
+        </div>
+      </Reveal>
       <div className="mt-8">
         <Button href={firm.contact.whatsappUrl} tone="ghost" pill>
           Chamar no WhatsApp

@@ -9,6 +9,7 @@ type ButtonProps = {
   className?: string;
   type?: "button" | "submit";
   disabled?: boolean;
+  onClick?: () => void;
 };
 
 const tones = {
@@ -26,12 +27,13 @@ export function Button({
   className = "",
   type = "button",
   disabled = false,
+  onClick,
 }: ButtonProps) {
   const classes = `inline-flex h-12 items-center justify-center px-5 text-[15px] font-medium transition-colors duration-200 ease-out disabled:cursor-wait disabled:opacity-70 ${tones[tone]} ${pill ? "rounded-full" : "rounded-surface"} ${className}`;
 
   if (!href) {
     return (
-      <button type={type} className={classes} disabled={disabled}>
+      <button type={type} className={classes} disabled={disabled} onClick={onClick}>
         {children}
       </button>
     );
@@ -44,9 +46,7 @@ export function Button({
       <a
         href={href}
         className={classes}
-        {...(href.startsWith("http")
-          ? { target: "_blank", rel: "noopener noreferrer" }
-          : {})}
+        {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {children}
       </a>

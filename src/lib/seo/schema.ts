@@ -132,6 +132,7 @@ export function personSchema(member: TeamMember) {
     worksFor: { "@id": `${resolveSiteUrl()}/#organization` },
     ...(member.oab ? { identifier: member.oab } : {}),
     ...(member.photo ? { image: `${resolveSiteUrl()}${member.photo}` } : {}),
+    ...(member.curriculum ? { knowsAbout: member.curriculum.focus } : {}),
   };
 }
 

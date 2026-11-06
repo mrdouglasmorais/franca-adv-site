@@ -534,6 +534,175 @@
   box-shadow: inset 3px 0 0 var(--color-seal);
 }
 
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  color: var(--color-paper);
+  background: rgb(10 10 10 / 0.94);
+  border-bottom: 1px solid transparent;
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  transition:
+    background-color var(--duration-micro) var(--ease-out),
+    border-color var(--duration-micro) var(--ease-out);
+}
+
+.site-header.is-scrolled {
+  background: rgb(10 10 10 / 0.72);
+  border-bottom-color: var(--color-line-light);
+}
+
+.header-cluster {
+  transition: opacity var(--duration-micro) var(--ease-out);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header,
+  .site-header.is-scrolled {
+    background: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-wait {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .reveal-wait.is-in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  }
+
+  .reveal-wait .form-field {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .reveal-wait.is-in .form-field {
+    opacity: 1;
+    transform: none;
+    transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  }
+
+  .reveal-wait.is-in .form-field:nth-child(2) { transition-delay: 40ms; }
+  .reveal-wait.is-in .form-field:nth-child(3) { transition-delay: 80ms; }
+  .reveal-wait.is-in .form-field:nth-child(4) { transition-delay: 120ms; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .area-form-in {
+    animation: rise 420ms var(--ease-out) both;
+  }
+}
+
+.contact-panel {
+  border: 1px solid var(--color-line);
+  background: var(--color-mist);
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact-panel {
+    padding: 2rem;
+  }
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.field {
+  width: 100%;
+  height: 3rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-surface);
+  background: var(--color-paper);
+  padding: 0 0.875rem;
+  color: var(--color-ink);
+  transition: border-color var(--duration-micro) var(--ease-out), background-color var(--duration-micro) var(--ease-out);
+}
+
+.field:hover {
+  border-color: rgb(10 10 10 / 0.36);
+}
+
+.field[aria-invalid="true"] {
+  border-color: var(--color-seal);
+}
+
+.field-area {
+  height: auto;
+  min-height: 8.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  resize: vertical;
+}
+
+.phone-line {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.field-ddi {
+  width: 10.5rem;
+  max-width: 46%;
+  flex: none;
+  padding-right: 1.75rem;
+  background-position: right 0.6rem center;
+}
+
+.field-phone {
+  flex: 1;
+  min-width: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.field-phone::placeholder {
+  color: var(--color-ink-soft);
+}
+
+.field-select {
+  appearance: none;
+  padding-right: 2.25rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%230a0a0a' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 0.7rem;
+}
+
+.field-check {
+  margin-top: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-seal);
+  flex: none;
+}
+
+.field-error {
+  margin-top: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--color-seal);
+}
+
+.form-status {
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.form-status[role="alert"] {
+  border-color: var(--color-seal);
+  color: var(--color-seal);
+}
+
 .area-grid > li {
   min-width: 0;
 }
@@ -733,6 +902,223 @@
   animation: none;
 }
 
+
+.career-timeline {
+  margin-top: 4rem;
+  border-top: 1px solid var(--color-line);
+  padding-top: 3rem;
+  scroll-margin-top: var(--header-height);
+}
+
+.career-spine {
+  position: relative;
+  margin-top: 3rem;
+  display: grid;
+  gap: 3rem;
+}
+
+.career-rail {
+  position: absolute;
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: calc(0.75rem - 0.5px);
+  width: 1px;
+  background: var(--color-line);
+}
+
+.career-rail-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-seal);
+  transform-origin: top center;
+}
+
+.career-chapter {
+  margin: 0;
+  padding: 0 0 0.25rem 2.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-seal);
+}
+
+.career-list {
+  display: grid;
+}
+
+.career-step {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: start;
+  padding: 1.35rem 0 1.75rem;
+}
+
+.career-year {
+  grid-column: 2;
+  min-height: 1.1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.career-year:empty {
+  display: none;
+}
+
+.career-year.is-range {
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  padding-top: 0.15rem;
+}
+
+.career-mark {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: 0.2rem;
+  justify-self: center;
+  border: 1px solid var(--color-seal);
+  background: var(--color-seal);
+}
+
+.career-copy {
+  grid-column: 2;
+  max-width: 62ch;
+  margin-top: 0.65rem;
+}
+
+.focus-flag {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+  font-size: 15px;
+  color: var(--color-ink);
+  transition:
+    border-color var(--duration-micro) var(--ease-out),
+    background-color var(--duration-micro) var(--ease-out);
+}
+
+.focus-flag:hover {
+  border-color: var(--color-seal);
+  background: var(--color-mist);
+}
+
+.focus-flag-mark {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  place-items: center;
+  background: var(--color-ink);
+  color: var(--color-gold);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .career-rail-fill {
+      transform: scaleY(0);
+      animation: career-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 80%;
+    }
+
+    .career-step {
+      animation: career-step linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+
+    .career-mark {
+      animation: career-mark linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 34%;
+    }
+
+    .focus-flag-item {
+      animation: career-step linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 26%;
+    }
+  }
+}
+
+@keyframes career-draw {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes career-step {
+  from {
+    opacity: 0.4;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes career-mark {
+  from {
+    border-color: var(--color-line);
+    background: var(--color-paper);
+  }
+
+  to {
+    border-color: var(--color-seal);
+    background: var(--color-seal);
+  }
+}
+
+@media (min-width: 768px) {
+  .career-rail {
+    left: calc(9rem + 0.75rem - 0.5px);
+  }
+
+  .career-chapter {
+    padding-left: calc(9rem + 1.5rem + 1.25rem);
+  }
+
+  .career-step {
+    grid-template-columns: 9rem 1.5rem minmax(0, 62ch);
+    column-gap: 0;
+  }
+
+  .career-year,
+  .career-year:empty {
+    display: block;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding-top: 0.15rem;
+  }
+
+  .career-mark {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0.45rem;
+  }
+
+  .career-copy {
+    grid-column: 3;
+    margin-top: 0;
+    padding-left: 1.25rem;
+  }
+}
 
 @utility nav-link {
   position: relative;

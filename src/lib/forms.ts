@@ -1,9 +1,81 @@
 import { practiceAreas } from "@/content/areas";
+import { isKnownDdi, splitCallingCode } from "@/lib/phone";
 
 const AREA_SLUGS = new Set(practiceAreas.map((area) => area.slug));
 
 export function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  const email = value.trim();
+  if (email.length > 254 || email.includes("..")) return false;
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+export function digitsOnly(value: string) {
+  return value.replace(/\D/g, "");
+}
+
+export function ddiCode(value: string) {
+  return digitsOnly(value).replace(/^0+/, "");
+}
+
+export function nameError(value: string) {
+  const name = value.trim().replace(/\s+/g, " ");
+  if (!name) return "Informe o nome completo.";
+  if (name.length > 120) return "O nome deve ter no máximo 120 caracteres.";
+  if (!/^[\p{L}][\p{L}\s'.’-]*$/u.test(name)) return "Use apenas letras no nome.";
+  const parts = name.split(" ").filter((part) => part.replace(/[.'’-]/g, "").length >= 2);
+  if (parts.length < 2) return "Informe nome e sobrenome.";
+  return null;
+}
+
+export function emailError(value: string, required: boolean) {
+  const email = value.trim();
+  if (!email) return required ? "Informe o e-mail." : null;
+  if (!isValidEmail(email)) return "Informe um e-mail válido.";
+  return null;
+}
+
+export function phoneLineError(ddiRaw: string, nationalRaw: string, required: boolean) {
+  const ddi = ddiCode(ddiRaw);
+  const national = digitsOnly(nationalRaw);
+  const ddiBlank = ddiRaw.trim() === "" || ddiRaw.trim() === "+";
+
+  if (!national) {
+    if (required) return { phone: "Informe o telefone com DDI." };
+    if (ddiBlank || ddi === "55") return {};
+    if (!isKnownDdi(ddi)) return { ddi: "Selecione o DDI." };
+    return { phone: "Informe o número depois do DDI." };
+  }
+
+  if (ddiBlank || !ddi || !isKnownDdi(ddi)) return { ddi: "Selecione o DDI." };
+  if (ddi.length + national.length < 8 || ddi.length + national.length > 15) {
+    return { phone: "Confira o DDI e o número." };
+  }
+  if (/^(\d)\1+$/.test(national)) return { phone: "Informe um telefone válido." };
+  if (ddi === "55" && !isValidBrPhone(national)) {
+    return { phone: "No Brasil, informe o DDD e o número, com 10 ou 11 dígitos." };
+  }
+  if (ddi !== "55" && (national.length < 6 || national.length > 12)) {
+    return { phone: "Informe o número depois do DDI." };
+  }
+  return {};
+}
+
+export function composePhone(ddiRaw: string, nationalRaw: string) {
+  return `+${ddiCode(ddiRaw)}${digitsOnly(nationalRaw)}`;
+}
+
+export function messageError(value: string, min: number, max: number) {
+  const message = value.trim();
+  if (min > 0 && !message) return "Escreva a mensagem.";
+  if (min > 0 && message.length < min) return `Escreva pelo menos ${min} caracteres.`;
+  if (message.length > max) return `Use no máximo ${max} caracteres.`;
+  return null;
+}
+
+export function areaError(slug: string) {
+  if (!slug) return null;
+  if (!AREA_SLUGS.has(slug)) return "Selecione uma das áreas do escritório.";
+  return null;
 }
 
 export function isValidBrPhone(value: string) {
@@ -36,24 +108,41 @@ export function parseLead(body: unknown): { ok: true; data: LeadInput } | { ok: 
   }
 
   const name = typeof raw.name === "string" ? raw.name.trim().replace(/\s+/g, " ") : "";
-  if (name.length < 2) return { ok: false, error: "Informe o nome completo." };
+  const invalidName = nameError(name);
+  if (invalidName) return { ok: false, error: invalidName };
 
   const email = typeof raw.email === "string" ? raw.email.trim() : "";
-  const phone = typeof raw.phone === "string" ? raw.phone.trim() : "";
-  if (!email && !phone) return { ok: false, error: "Informe e-mail ou telefone." };
-  if (email && !isValidEmail(email)) return { ok: false, error: "Informe um e-mail válido." };
-  if (phone && !isValidBrPhone(phone)) {
-    return { ok: false, error: "Informe um telefone com DDD (10 ou 11 dígitos)." };
+  const phoneRaw = typeof raw.phone === "string" ? raw.phone.trim() : "";
+  const ddiRaw = typeof raw.ddi === "string" ? raw.ddi.trim() : "";
+  const invalidEmail = emailError(email, false);
+  if (invalidEmail) return { ok: false, error: invalidEmail };
+
+  let phone = "";
+  if (phoneRaw.startsWith("+") || phoneRaw.replace(/[\s()-]/g, "").startsWith("+")) {
+    const split = splitCallingCode(phoneRaw);
+    if (!split) return { ok: false, error: "Selecione o DDI." };
+    const line = phoneLineError(`+${split.ddi}`, split.national, false);
+    const lineError = line.ddi ?? line.phone;
+    if (lineError) return { ok: false, error: lineError };
+    phone = `+${split.ddi}${split.national}`;
+  } else if (digitsOnly(phoneRaw)) {
+    const line = phoneLineError(ddiRaw, phoneRaw, false);
+    const lineError = line.ddi ?? line.phone;
+    if (lineError) return { ok: false, error: lineError };
+    phone = composePhone(ddiRaw, phoneRaw);
+  } else if (ddiRaw && ddiCode(ddiRaw) !== "55") {
+    return { ok: false, error: "Informe o número depois do DDI." };
   }
+
+  if (!email && !phone) return { ok: false, error: "Informe o e-mail ou o telefone com DDI." };
 
   const areaSlug = typeof raw.areaSlug === "string" ? raw.areaSlug.trim() : "";
-  if (areaSlug && !AREA_SLUGS.has(areaSlug)) {
-    return { ok: false, error: "Selecione uma das áreas do escritório." };
-  }
+  const invalidArea = areaError(areaSlug);
+  if (invalidArea) return { ok: false, error: invalidArea };
 
   const message = typeof raw.message === "string" ? raw.message.trim() : "";
-  if (message.length < 10) return { ok: false, error: "Descreva a demanda com pelo menos 10 caracteres." };
-  if (message.length > 5000) return { ok: false, error: "A mensagem deve ter no máximo 5000 caracteres." };
+  const invalidMessage = messageError(message, 10, 5000);
+  if (invalidMessage) return { ok: false, error: invalidMessage };
 
   const consent = raw.lgpdConsent;
   if (consent !== true && consent !== "true" && consent !== "on") {
@@ -83,14 +172,21 @@ export function parseApplication(form: FormData): { ok: true; form: FormData } |
   }
 
   const name = String(form.get("name") ?? "").trim().replace(/\s+/g, " ");
-  if (name.length < 2 || name.length > 120) return { ok: false, error: "Informe o nome completo." };
+  const invalidName = nameError(name);
+  if (invalidName) return { ok: false, error: invalidName };
 
   const email = String(form.get("email") ?? "").trim();
-  if (!isValidEmail(email)) return { ok: false, error: "Informe um e-mail válido." };
+  const invalidEmail = emailError(email, true);
+  if (invalidEmail) return { ok: false, error: invalidEmail };
 
-  const phone = String(form.get("phone") ?? "").trim();
-  if (phone && !isValidBrPhone(phone)) {
-    return { ok: false, error: "Informe um telefone com DDD ou deixe o campo em branco." };
+  const phoneRaw = String(form.get("phone") ?? "").trim();
+  const ddiRaw = String(form.get("ddi") ?? "").trim();
+  let phone = "";
+  if (digitsOnly(phoneRaw)) {
+    const line = phoneLineError(ddiRaw || "+55", phoneRaw, false);
+    const lineError = line.ddi ?? line.phone;
+    if (lineError) return { ok: false, error: lineError };
+    phone = composePhone(ddiRaw || "+55", phoneRaw);
   }
 
   const role = String(form.get("role") ?? "").trim();

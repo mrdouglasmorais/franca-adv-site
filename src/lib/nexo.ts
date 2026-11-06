@@ -17,8 +17,9 @@ export async function forwardToNexo(
   contentType?: string,
 ) {
   if (!secret) {
+    console.error(`nexo ${path} sem credencial de envio`);
     return Response.json(
-      { error: "O envio está temporariamente indisponível." },
+      { error: "O envio não foi registrado. Tente de novo em instantes ou fale pelo WhatsApp." },
       { status: 503 },
     );
   }
@@ -52,16 +53,20 @@ export async function forwardToNexo(
     payload = {};
   }
 
+  if (!response.ok) {
+    console.error(`nexo ${path} respondeu ${response.status}`);
+  }
+
   if (response.status === 401) {
     return Response.json(
-      { error: "O envio está temporariamente indisponível." },
+      { error: "O envio não foi registrado. Tente de novo em instantes ou fale pelo WhatsApp." },
       { status: 503 },
     );
   }
 
   if (!response.ok) {
     return Response.json(
-      { error: payload.error ?? "Não foi possível concluir o envio." },
+      { error: payload.error ?? "Não foi possível concluir o envio. Tente de novo em instantes." },
       { status: response.status },
     );
   }
