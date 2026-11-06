@@ -85,7 +85,9 @@
   .logo-rail-track,
   .team-portrait,
   .team-frame,
-  .team-photo {
+  .team-photo,
+  .hero-seal-mark,
+  .footer-seal-mark {
     animation: none !important;
     transform: none !important;
     clip-path: none !important;
@@ -208,10 +210,111 @@
   to { transform: scale(1.24) translate3d(-5.5%, -4%, 0); }
 }
 
+.hero-drift,
+.image-drift {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
 .hero-slide.is-on .hero-drift,
 .image-drift {
-  transform-origin: center center;
   animation: drift 9s linear alternate infinite;
+}
+
+.hero-seal {
+  position: absolute;
+  z-index: 1;
+  top: calc(var(--header-height) + 0.75rem);
+  right: 1rem;
+  width: 6.25rem;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .hero-copy {
+    padding-right: 6.75rem;
+  }
+}
+
+.hero-seal-mark,
+.footer-seal-mark {
+  transform-origin: center;
+  animation: seal-pulse 2.8s ease-in-out infinite;
+}
+
+.hero-seal-mark {
+  width: 100%;
+  height: auto;
+}
+
+.footer-seal {
+  width: 8.4rem;
+  flex-shrink: 0;
+}
+
+.footer-seal-mark {
+  width: 8.4rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.hero-seal-caption {
+  margin-top: 0.65rem;
+  color: var(--color-gold-soft);
+  font-size: 0.816rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-align: center;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 0.7);
+  text-transform: uppercase;
+}
+
+.hero-seal-caption span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--color-paper);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+@media (max-width: 767px) {
+  .hero-seal .hero-seal-caption span {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer-seal {
+    width: 10.8rem;
+  }
+
+  .footer-seal-mark {
+    width: 10.8rem;
+  }
+}
+
+@keyframes seal-pulse {
+  0%,
+  100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+@media (min-width: 768px) {
+  .hero-seal {
+    top: 22%;
+    right: max(2rem, calc((100vw - 70rem) / 2));
+    width: 11rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-seal {
+    width: 13.5rem;
+  }
 }
 
 .hero-caption {
@@ -363,6 +466,12 @@
     border-color var(--duration-micro) var(--ease-out);
 }
 
+.whatsapp-mark {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+}
+
 .social-link svg {
   width: 1.05rem;
   height: 1.05rem;
@@ -462,7 +571,10 @@
 }
 
 .team-photo {
+  position: absolute;
+  inset: 0;
   transform-origin: center top;
+  backface-visibility: hidden;
   animation:
     team-photo-in 520ms var(--ease-out) both,
     drift 9s linear 520ms alternate infinite;
@@ -1043,6 +1155,7 @@
 }
 
 .area-card {
+  position: relative;
   display: flex;
   width: 100%;
   aspect-ratio: 1;
@@ -1050,34 +1163,37 @@
   overflow: hidden;
   flex-direction: column;
   border: 1px solid var(--color-line);
-  background: var(--color-paper);
-  padding: 1.5rem;
-  color: var(--color-ink);
-  transition:
-    background-color 220ms var(--ease-out),
-    border-color 220ms var(--ease-out),
-    color 220ms var(--ease-out),
-    transform 280ms var(--ease-out);
+  background: var(--color-ink);
+  padding: 1.25rem;
+  color: var(--color-paper);
+  transition: border-color var(--duration-micro) var(--ease-out);
 }
 
-.area-grid > li:nth-child(even) .area-card {
-  background: var(--color-mist);
+.area-card-photo {
+  transition: transform 420ms var(--ease-out);
+}
+
+.area-card-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(10 10 10 / 0.08) 18%, rgb(10 10 10 / 0.86) 100%);
+  transition: background-color var(--duration-micro) var(--ease-out);
 }
 
 .area-card:hover,
-.area-card:focus-visible,
-.area-grid > li:nth-child(even) .area-card:hover,
-.area-grid > li:nth-child(even) .area-card:focus-visible {
+.area-card:focus-visible {
   z-index: 1;
   border-color: var(--color-seal);
-  background: var(--color-seal);
-  color: var(--color-on-seal);
-  transform: scale(1.03);
 }
 
-.area-card:hover :is(.text-seal, .text-ink-soft, .area-card-summary),
-.area-card:focus-visible :is(.text-seal, .text-ink-soft, .area-card-summary) {
-  color: var(--color-gold-soft);
+.area-card:hover .area-card-photo,
+.area-card:focus-visible .area-card-photo {
+  transform: scale(1.05);
+}
+
+.area-card:hover .area-card-shade,
+.area-card:focus-visible .area-card-shade {
+  background: linear-gradient(180deg, rgb(10 10 10 / 0.28) 0%, rgb(10 10 10 / 0.9) 100%);
 }
 
 @media (max-width: 479px) {

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPracticeArea, practiceAreas } from "@/content/areas";
-import { illustrationFor } from "@/content/visuals";
 import { AreaContact } from "@/components/site/area-contact";
 import { PageBanner } from "@/components/site/page-banner";
 import { Reveal } from "@/components/site/reveal";
@@ -41,12 +40,11 @@ export default async function AreaPage({ params }: Props) {
   ];
 
   const others = practiceAreas.filter((item) => item.slug !== area.slug);
-  const visual = illustrationFor(practiceAreas.findIndex((item) => item.slug === area.slug));
 
   return (
     <>
       <PageBanner
-        image={visual}
+        image={{ src: area.image }}
         crumbs={crumbs}
         kicker="Itajaí / SC"
         title={area.name}

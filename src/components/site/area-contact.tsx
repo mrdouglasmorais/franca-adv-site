@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { firm } from "@/content/firm";
 import { ContactForm } from "@/components/site/contact-form";
+import { WhatsAppMark } from "@/components/site/whatsapp-mark";
 import { Button } from "@/components/ui/button";
 
 export function AreaContact({
@@ -56,6 +57,7 @@ export function AreaContact({
       )}
       <div className="mt-4">
         <Button href={firm.contact.whatsappUrl} tone="ghost" pill className="w-full">
+          <WhatsAppMark />
           Chamar no WhatsApp
         </Button>
       </div>

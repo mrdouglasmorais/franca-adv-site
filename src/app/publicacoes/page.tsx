@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { firm } from "@/content/firm";
 import { illustrations } from "@/content/visuals";
 import { PageBanner } from "@/components/site/page-banner";
+import { WhatsAppMark } from "@/components/site/whatsapp-mark";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -34,6 +35,7 @@ export default function PostsPage() {
       <JsonLd data={breadcrumbSchema(crumbs)} />
       <div>
         <Button href={firm.contact.whatsappUrl} pill>
+          <WhatsAppMark />
           Falar com o escritório
         </Button>
       </div>

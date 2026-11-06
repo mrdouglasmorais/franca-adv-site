@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { PracticeArea } from "@/content/areas";
 
@@ -15,14 +16,23 @@ export function AreaCard({
   return (
     <li>
       <Link href={`/areas/${area.slug}`} className="area-card">
-        <span className="text-xs font-semibold tracking-[0.14em] text-seal">
+        <Image
+          src={area.image}
+          alt=""
+          fill
+          sizes="(min-width: 768px) 33vw, 100vw"
+          className="area-card-photo object-cover"
+          draggable={false}
+        />
+        <span className="area-card-shade" aria-hidden="true" />
+        <span className="relative text-xs font-semibold tracking-[0.14em] text-gold">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <Title className="mt-auto line-clamp-3 font-display text-[clamp(1.35rem,1.7vw,1.85rem)] leading-tight font-medium tracking-tight">
+        <Title className="relative mt-auto line-clamp-3 font-display text-[clamp(1.35rem,1.7vw,1.85rem)] leading-tight font-medium tracking-tight text-paper">
           {area.name}
         </Title>
-        <p className="area-card-summary mt-2 line-clamp-3 text-sm leading-5 text-ink-soft">{area.summary}</p>
-        <span className="area-arrow mt-4 text-sm font-medium">Ver esta área</span>
+        <p className="area-card-summary relative mt-2 line-clamp-3 text-sm leading-5 text-gold-soft">{area.summary}</p>
+        <span className="area-arrow relative mt-4 text-sm font-medium text-paper">Ver esta área</span>
       </Link>
     </li>
   );

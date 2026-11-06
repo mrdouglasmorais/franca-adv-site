@@ -32,24 +32,41 @@ export function HeroStage() {
           const current = itemIndex === carousel.index;
           return (
             <div key={item.src} className={`hero-slide ${current ? "is-on" : ""}`}>
-              <Image
-                src={item.src}
-                alt=""
-                fill
-                priority={itemIndex === 0 && carousel.index === 0}
-                loading={itemIndex === 0 && carousel.index === 0 ? undefined : current ? "eager" : "lazy"}
-                sizes="100vw"
-                className="object-cover hero-drift"
-                draggable={false}
-              />
+              <div className="hero-drift">
+                <Image
+                  src={item.src}
+                  alt=""
+                  fill
+                  priority={itemIndex === 0 && carousel.index === 0}
+                  loading={itemIndex === 0 && carousel.index === 0 ? undefined : current ? "eager" : "lazy"}
+                  sizes="100vw"
+                  className="object-cover"
+                  draggable={false}
+                />
+              </div>
             </div>
           );
         })}
         <div className="hero-shade" />
       </div>
 
+      <div className="hero-seal">
+        <Image
+          src="/seal/seal.png"
+          alt=""
+          width={1254}
+          height={1254}
+          className="hero-seal-mark"
+          draggable={false}
+        />
+        <p className="hero-seal-caption">
+          {firm.sealLine}
+          <span>{firm.sealNote}</span>
+        </p>
+      </div>
+
       <Container className="relative grid min-h-[calc(100svh-var(--header-height))] content-end gap-10 py-14 md:py-16">
-        <div className="max-w-[40rem]">
+        <div className="hero-copy max-w-[40rem]">
           <Eyebrow tone="gold">
             {firm.tagline} · {firm.address.city}/{firm.address.region}
           </Eyebrow>

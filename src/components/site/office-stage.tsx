@@ -33,14 +33,16 @@ export function OfficeStage() {
           const current = itemIndex === carousel.index;
           return (
             <div key={item.src} className={`hero-slide ${current ? "is-on" : ""}`}>
-              <Image
-                src={item.src}
-                alt=""
-                fill
-                sizes="100vw"
-                className="object-cover hero-drift"
-                draggable={false}
-              />
+              <div className="hero-drift">
+                <Image
+                  src={item.src}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                  draggable={false}
+                />
+              </div>
             </div>
           );
         })}

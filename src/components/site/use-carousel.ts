@@ -8,10 +8,19 @@ export function useCarousel(length: number, intervalMs = 7000) {
   const [hovered, setHovered] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [reduce, setReduce] = useState(false);
+  const [canHover, setCanHover] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setReduce(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setCanHover(media.matches);
     sync();
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
@@ -23,7 +32,7 @@ export function useCarousel(length: number, intervalMs = 7000) {
     return () => document.removeEventListener("visibilitychange", sync);
   }, []);
 
-  const paused = userPaused || hovered || hidden || reduce;
+  const paused = userPaused || (canHover && hovered) || hidden || reduce;
 
   useEffect(() => {
     if (paused) return;

@@ -6,6 +6,7 @@ export type AreaTopic = {
 export type PracticeArea = {
   slug: string;
   name: string;
+  image: string;
   summary: string;
   lead: string;
   context: string;
@@ -22,6 +23,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-civil",
     name: "Direito Civil",
+    image: "/areas/civil.jpg",
     summary: "Conflitos de patrimônio, responsabilidade, posse e obrigações.",
     lead: "O caso chega com um bem, um dano ou um contrato que não se cumpriu.",
     context:
@@ -53,6 +55,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-imobiliario",
     name: "Direito Imobiliário",
+    image: "/areas/imobiliario.jpg",
     summary: "Compra, venda, locação, posse e o que a matrícula registra.",
     lead: "Compra, venda, locação e o que a matrícula do imóvel registra.",
     context:
@@ -85,6 +88,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-de-familia",
     name: "Direito de Família",
+    image: "/areas/familia.jpg",
     summary: "Divórcio, guarda, alimentos, visitas, união estável e inventário.",
     lead: "Divórcio, guarda, alimentos e inventário, com os documentos da família.",
     context:
@@ -116,6 +120,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-do-trabalho",
     name: "Direito do Trabalho",
+    image: "/areas/trabalho.jpg",
     summary: "Ações, rescisões, acidentes e passivos de quem emprega e de quem é empregado.",
     lead: "Ação, rescisão ou acidente, para empregado e para empregador.",
     context:
@@ -147,6 +152,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-empresarial",
     name: "Direito Empresarial",
+    image: "/areas/empresarial.jpg",
     summary: "Abertura, operação, expansão e reestruturação de sociedades.",
     lead: "Abertura, operação, expansão ou reestruturação da sociedade.",
     context:
@@ -176,42 +182,9 @@ export const practiceAreas: readonly PracticeArea[] = [
       "Direito Empresarial em Itajaí/SC: abertura, operação, expansão e reestruturação de empresas.",
   },
   {
-    slug: "direito-das-franquias",
-    name: "Direito das Franquias e dos Franqueados",
-    summary: "Circular de oferta, contrato e conflito de rede, para franqueador e franqueado.",
-    lead: "Circular de oferta e contrato, para quem franqueia e para quem é franqueado.",
-    context:
-      "A Lei 13.966/2019 exige a Circular de Oferta de Franquia, em português, antes da assinatura, do pré-contrato ou do pagamento de taxa ao franqueador. O escritório lê essa circular, o contrato e o que já foi cobrado ou descumprido.",
-    reading:
-      "A análise separa o que a rede informou na oferta, o que o contrato impõe e o conflito que já existe: taxa, fornecimento, território ou saída. Não há promessa de resultado.",
-    problems: [
-      {
-        title: "Circular de oferta",
-        detail: "Se a circular existiu, o que ela informou e se veio antes do pagamento.",
-      },
-      {
-        title: "Contrato de franquia",
-        detail: "Território, taxa, compra obrigatória, prazo e condições de saída.",
-      },
-      {
-        title: "Conflito de rede",
-        detail: "Cobrança, rescisão e cláusula de não concorrência já discutidas.",
-      },
-    ],
-    documents: [
-      "Circular de oferta de franquia",
-      "Contrato, pré-contrato e aditivos",
-      "Comprovantes de taxa, fundo de propaganda e compras",
-      "Mensagens sobre inadimplemento ou rescisão",
-    ],
-    norm: "Lei nº 13.966/2019. A circular de oferta antecede a assinatura, o pré-contrato ou o pagamento de taxa.",
-    seoTitle: "Direito das Franquias",
-    seoDescription:
-      "Direito das Franquias em Itajaí/SC: circular de oferta, contrato e conflito de rede para franqueador e franqueado.",
-  },
-  {
     slug: "contratos",
     name: "Contratos",
+    image: "/areas/contratos.jpg",
     summary: "Elaboração, revisão e negociação de contratos civis e empresariais.",
     lead: "Minuta, revisão e negociação, antes que o conflito exista.",
     context:
@@ -243,6 +216,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "assessoria-juridica-empresarial",
     name: "Assessoria Jurídica Empresarial",
+    image: "/areas/assessoria.jpg",
     summary: "Prevenção e contencioso para a operação da empresa.",
     lead: "Acompanhamento da operação, na prevenção e no processo.",
     context:
@@ -274,6 +248,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-criminal",
     name: "Direito Criminal",
+    image: "/areas/criminal.jpg",
     summary: "Defesa a partir dos autos e do prazo da intimação.",
     lead: "Defesa a partir dos autos e do prazo da intimação.",
     context:

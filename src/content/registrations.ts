@@ -32,6 +32,12 @@ export const oabEntries: readonly OabEntry[] = [
     number: "075307",
     holder: "Monike Eva Oliveira Araujo",
   },
+  {
+    uf: "SC",
+    state: "Santa Catarina",
+    number: "60.730",
+    holder: "Mauricio Lemos da Silva",
+  },
 ];
 
 export function oabByState() {

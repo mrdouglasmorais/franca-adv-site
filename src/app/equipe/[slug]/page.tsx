@@ -5,6 +5,7 @@ import { getTeamMember, initialsOf, team } from "@/content/team";
 import { Breadcrumb } from "@/components/site/breadcrumb";
 import { CareerTimeline, FocusFlags } from "@/components/site/career-timeline";
 import { PortraitSlides } from "@/components/site/portrait-slides";
+import { WhatsAppMark } from "@/components/site/whatsapp-mark";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -88,6 +89,7 @@ export default async function TeamMemberPage({ params }: Props) {
               Falar com o escritório
             </Button>
             <Button href={firm.contact.whatsappUrl} tone="ghost">
+              <WhatsAppMark />
               Chamar no WhatsApp
             </Button>
           </div>

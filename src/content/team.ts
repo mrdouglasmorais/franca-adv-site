@@ -209,6 +209,40 @@ export const team: readonly TeamMember[] = [
     },
   },
   {
+    slug: "mauricio-lemos-da-silva",
+    name: "Mauricio Lemos da Silva",
+    role: "Advogado",
+    oab: "OAB/SC 60.730",
+    photos: ["/team/mauricio.jpeg"],
+    summary:
+      "Advogado do escritório em Itajaí. Graduado em Direito pela UNIVALI em 2016, com pós-graduação em Direito Processual Civil pela UNIVALI em 2024.",
+    paragraphs: [
+      "Advogado do escritório em Itajaí. Graduou-se em Direito pela Universidade do Vale do Itajaí (UNIVALI) em 2016.",
+      "Concluiu a pós-graduação em Direito Processual Civil pela UNIVALI em 2024.",
+    ],
+    curriculum: {
+      focus: [],
+      education: [
+        {
+          period: "2016",
+          title: "Bacharelado em Direito",
+          detail: "Universidade do Vale do Itajaí, UNIVALI.",
+        },
+        {
+          period: "2024",
+          title: "Pós-graduação em Direito Processual Civil",
+          detail: "Universidade do Vale do Itajaí, UNIVALI.",
+        },
+      ],
+      experience: [
+        {
+          title: "Advogado",
+          detail: "Ferreira França Advocacia e Assessoria Jurídica.",
+        },
+      ],
+    },
+  },
+  {
     slug: "edivania-fonseca-mota",
     name: "Edivânia Fonseca Mota",
     role: "Assistente jurídica",

@@ -11,7 +11,7 @@ import { breadcrumbSchema } from "@/lib/seo/schema";
 export const metadata: Metadata = buildMetadata({
   title: "Áreas de atuação",
   description:
-    "Áreas de atuação da Ferreira França Advogados em Itajaí/SC: civil, família, trabalho, empresarial, franquias, contratos e criminal.",
+    "Áreas de atuação da Ferreira França Advogados em Itajaí/SC: civil, imobiliário, família, trabalho, empresarial, contratos e criminal.",
   path: "/areas",
 });
 

@@ -26,7 +26,7 @@ export const illustrations: readonly Illustration[] = [
     src: "/image/hero/ilustration-c.webp",
     alt: "Ilustração de uma sala de reunião com vista para a cidade e o brasão do escritório",
     kicker: "Reunião",
-    line: "Civil, imobiliário, família, trabalho, empresarial, franquias, contratos e criminal.",
+    line: "Civil, imobiliário, família, trabalho, empresarial, contratos e criminal.",
   },
   {
     src: "/image/hero/ilustration-d.webp",

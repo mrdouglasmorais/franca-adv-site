@@ -23,7 +23,7 @@ Fontes: identidade em FrancaAdv (`src/config/site.ts`, `public/logo-*.png`, `glo
 
 ## Áreas
 
-As oito do site atual: civil, família, trabalho, empresarial, franquias, contratos, assessoria jurídica empresarial, criminal. Slugs em `src/content/areas.ts`.
+As áreas do site: civil, imobiliário, família, trabalho, empresarial, contratos, assessoria jurídica empresarial, criminal. Sem a área de franquias. Slugs em `src/content/areas.ts`.
 
 ## SEO e performance
 

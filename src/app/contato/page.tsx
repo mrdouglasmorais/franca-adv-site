@@ -6,6 +6,7 @@ import { SocialLinks } from "@/components/site/social-links";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ContactForm } from "@/components/site/contact-form";
 import { Reveal } from "@/components/site/reveal";
+import { WhatsAppMark } from "@/components/site/whatsapp-mark";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { buildMetadata } from "@/lib/seo/metadata";
@@ -42,6 +43,7 @@ export default function ContactPage() {
       </Reveal>
       <div className="mt-8">
         <Button href={firm.contact.whatsappUrl} tone="ghost" pill>
+          <WhatsAppMark />
           Chamar no WhatsApp
         </Button>
       </div>

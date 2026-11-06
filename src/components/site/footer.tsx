@@ -4,6 +4,7 @@ import { practiceAreas } from "@/content/areas";
 import { firm, nav } from "@/content/firm";
 import { oabByState, oabEntries } from "@/content/registrations";
 import { BackToTopButton } from "@/components/site/back-to-top";
+import { WhatsAppMark } from "@/components/site/whatsapp-mark";
 import { SocialLinks } from "@/components/site/social-links";
 import { Container } from "@/components/ui/container";
 
@@ -56,8 +57,9 @@ export function Footer() {
             href={firm.contact.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex h-11 items-center rounded-full bg-seal px-4 text-sm font-medium text-on-seal"
+            className="mt-4 inline-flex h-11 items-center gap-2 rounded-full bg-seal px-4 text-sm font-medium text-on-seal"
           >
+            <WhatsAppMark />
             Falar pelo WhatsApp
           </a>
           <dl className="mt-6 space-y-3 text-sm">
@@ -116,7 +118,8 @@ export function Footer() {
           <p className="text-xs font-semibold tracking-[0.14em] text-gold uppercase">Canais</p>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <a href={firm.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-gold">
+              <a href={firm.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold">
+                <WhatsAppMark />
                 WhatsApp
               </a>
             </li>
@@ -152,14 +155,20 @@ export function Footer() {
             <p className="text-sm text-gold-soft">{firm.entity}</p>
             <p className="mt-1 text-sm whitespace-nowrap">CNPJ {firm.cnpj}</p>
           </div>
-          <Image
-            src="/seal/seal.png"
-            alt="Selo de excelência Ferreira França Advogados, desde 2016"
-            width={1254}
-            height={1254}
-            className="h-[8.4rem] w-[8.4rem] shrink-0 md:h-[10.8rem] md:w-[10.8rem]"
-            draggable={false}
-          />
+          <div className="footer-seal">
+            <Image
+              src="/seal/seal.png"
+              alt=""
+              width={1254}
+              height={1254}
+              className="footer-seal-mark"
+              draggable={false}
+            />
+            <p className="hero-seal-caption">
+              {firm.sealLine}
+              <span>{firm.sealNote}</span>
+            </p>
+          </div>
         </div>
         <div className="mt-5 space-y-4">
           {groups.map((group) => (

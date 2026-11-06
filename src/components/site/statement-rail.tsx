@@ -32,14 +32,16 @@ export function StatementRail() {
               key={item.src}
               className={`hero-slide ${itemIndex === carousel.index ? "is-on statement-wipe" : ""}`}
             >
-              <Image
-                src={item.src}
-                alt={itemIndex === carousel.index ? item.alt : ""}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover image-drift"
-                draggable={false}
-              />
+              <div className="hero-drift">
+                <Image
+                  src={item.src}
+                  alt={itemIndex === carousel.index ? item.alt : ""}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                  draggable={false}
+                />
+              </div>
             </div>
           ))}
         </div>

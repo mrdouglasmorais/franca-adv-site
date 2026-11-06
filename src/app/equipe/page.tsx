@@ -40,15 +40,17 @@ export default function TeamPage() {
         </div>
         <figure className="team-stage">
           <div className="image-frame relative aspect-[9/16] bg-ink">
-            <Image
-              src="/team/time.jpeg"
-              alt="Equipe do escritório em Itajaí"
-              fill
-              sizes="(min-width: 1024px) 28rem, 100vw"
-              className="team-photo object-cover object-top"
-              priority
-              draggable={false}
-            />
+            <div className="team-photo">
+              <Image
+                src="/team/time.jpeg"
+                alt="Equipe do escritório em Itajaí"
+                fill
+                sizes="(min-width: 1024px) 28rem, 100vw"
+                className="object-cover object-top"
+                priority
+                draggable={false}
+              />
+            </div>
           </div>
         </figure>
       </div>

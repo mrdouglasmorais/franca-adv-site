@@ -36,7 +36,7 @@ export const firm = {
   legalName: "Ferreira França Advocacia e Assessoria Empresarial",
   tagline: "Advocacia e Assessoria Empresarial",
   description:
-    "Advocacia e assessoria empresarial em Itajaí/SC. Atuação consultiva e contenciosa em civil, família, trabalho, empresarial, franquias, contratos e criminal.",
+    "Advocacia e assessoria empresarial em Itajaí/SC. Atuação consultiva e contenciosa em civil, imobiliário, família, trabalho, empresarial, contratos e criminal.",
   seo: {
     defaultTitle: "Ferreira França Advogados | Advocacia em Itajaí",
     titleTemplate: "%s | Ferreira França Advogados",
@@ -54,6 +54,8 @@ export const firm = {
   entity: "Ferreira França Sociedade de Advocacia",
   cnpj: "52.426.341/0001-27",
   foundingYear: 2016,
+  sealLine: "Mais de 20 anos de atuação.",
+  sealNote: "A equipe atende pessoas e empresas em Itajaí desde 2016.",
   address: {
     street: "Rua Lauro Muller, 853, sala 01",
     neighborhood: "Fazenda",
