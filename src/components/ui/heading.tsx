@@ -9,14 +9,16 @@ const styles = {
 export function Eyebrow({
   children,
   tone = "soft",
+  className = "",
 }: {
   children: ReactNode;
   tone?: "soft" | "seal" | "gold";
+  className?: string;
 }) {
   const color =
     tone === "seal" ? "text-seal" : tone === "gold" ? "text-gold" : "text-ink-soft";
   return (
-    <p className={`text-xs font-semibold tracking-[0.14em] uppercase ${color}`}>{children}</p>
+    <p className={`text-xs font-semibold tracking-[0.14em] uppercase ${color} ${className}`}>{children}</p>
   );
 }
 

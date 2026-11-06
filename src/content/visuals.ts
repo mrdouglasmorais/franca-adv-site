@@ -1,3 +1,5 @@
+import { firm } from "@/content/firm";
+
 /** Ilustrações institucionais de FrancaAdv (`public/image/hero`). Não são fotos do escritório. */
 
 export type Illustration = {
@@ -24,13 +26,40 @@ export const illustrations: readonly Illustration[] = [
     src: "/image/hero/ilustration-c.webp",
     alt: "Ilustração de uma sala de reunião com vista para a cidade e o brasão do escritório",
     kicker: "Reunião",
-    line: "Civil, família, trabalho, empresarial, franquias, contratos e criminal.",
+    line: "Civil, imobiliário, família, trabalho, empresarial, franquias, contratos e criminal.",
   },
   {
     src: "/image/hero/ilustration-d.webp",
     alt: "Ilustração de um corredor escuro com sala ao fundo e o brasão do escritório",
     kicker: "Presença",
     line: "Sede em Itajaí. Acompanhamento remoto nos outros estados.",
+  },
+] as const;
+
+export const officeSlides = [
+  {
+    ...illustrations[0],
+    kicker: "Atendimento",
+    title: "No escritório",
+    line: `${firm.contact.hours}. ${firm.address.full}.`,
+  },
+  {
+    ...illustrations[1],
+    kicker: "Estrutura",
+    title: "Os papéis primeiro",
+    line: "Documentos, fatos e prazos. É o material com que a equipe começa.",
+  },
+  {
+    ...illustrations[2],
+    kicker: "Reunião",
+    title: "O caso na mesa",
+    line: "Compra, venda, locação, contrato e o conflito que já chegou.",
+  },
+  {
+    ...illustrations[3],
+    kicker: "Sede",
+    title: "Sede em Itajaí",
+    line: "A sede é em Itajaí/SC. Nos outros estados, o acompanhamento é remoto.",
   },
 ] as const;
 

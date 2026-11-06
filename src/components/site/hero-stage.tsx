@@ -11,7 +11,6 @@ import { useCarousel } from "@/components/site/use-carousel";
 
 export function HeroStage() {
   const carousel = useCarousel(illustrations.length);
-  const slide = illustrations[carousel.index];
   const nextIndex = (carousel.index + 1) % illustrations.length;
 
   return (
@@ -57,10 +56,8 @@ export function HeroStage() {
           <Heading level={1} className="mt-6 max-w-[16ch] text-paper">
             Advocacia em Itajaí para empresas e pessoas
           </Heading>
-          <p className="mt-6 max-w-[46ch] text-lg text-gold-soft" aria-live="polite">
-            <span key={slide.kicker} className="hero-caption">
-              {slide.line}
-            </span>
+          <p className="mt-6 max-w-[46ch] text-lg text-gold-soft">
+            Consultoria e contencioso, com sede em Itajaí/SC.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/contato" pill>

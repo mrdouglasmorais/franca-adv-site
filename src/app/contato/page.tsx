@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { firm } from "@/content/firm";
 import { illustrations } from "@/content/visuals";
-import { Breadcrumb } from "@/components/site/breadcrumb";
 import { PageBanner } from "@/components/site/page-banner";
 import { SocialLinks } from "@/components/site/social-links";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ContactForm } from "@/components/site/contact-form";
+import { OfficeStage } from "@/components/site/office-stage";
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Eyebrow, Heading } from "@/components/ui/heading";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
@@ -28,18 +27,17 @@ const crumbs = [
 export default function ContactPage() {
   return (
     <>
-    <PageBanner image={illustrations[0]} />
+    <PageBanner
+      image={illustrations[0]}
+      crumbs={crumbs}
+      kicker="Itajaí / SC"
+      title="Fale com o escritório"
+      line="Conte a demanda no formulário. A mensagem entra na fila, de segunda a sexta, das 8h às 18h."
+    />
+    <OfficeStage />
     <Container className="py-16 md:py-24">
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <Breadcrumb items={crumbs} />
-      <Eyebrow tone="seal">Itajaí / SC</Eyebrow>
-      <Heading level={1} className="mt-3">
-        Fale com o escritório
-      </Heading>
-      <p className="mt-4 max-w-[62ch] text-ink-soft">
-        Conte a demanda no formulário. A mensagem entra na fila, de segunda a sexta, das 8h às 18h.
-      </p>
-      <Reveal className="mt-10 max-w-[40rem]">
+      <Reveal className="max-w-[40rem]">
         <div id="formulario">
           <ContactForm title="Sua mensagem" />
         </div>

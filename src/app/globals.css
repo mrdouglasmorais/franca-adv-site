@@ -147,6 +147,33 @@
   opacity: 1;
 }
 
+.office-stage {
+  position: relative;
+  min-height: min(88svh, 52rem);
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.office-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(10 10 10 / 0.18) 0%, rgb(10 10 10 / 0.42) 38%, rgb(10 10 10 / 0.92) 100%),
+    linear-gradient(90deg, rgb(10 10 10 / 0.72) 0%, rgb(10 10 10 / 0.18) 62%);
+}
+
+.office-title {
+  max-width: 12ch;
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.75rem);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
 .hero-shade {
   position: absolute;
   inset: 0;
@@ -156,6 +183,14 @@
     rgb(10 10 10 / 0.78) 38%,
     rgb(10 10 10 / 0.28) 100%
   );
+}
+
+.page-banner-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(10 10 10 / 0.25) 0%, rgb(10 10 10 / 0.82) 100%),
+    linear-gradient(90deg, rgb(10 10 10 / 0.78) 0%, rgb(10 10 10 / 0.2) 72%);
 }
 
 .hero-shade-band {
@@ -276,7 +311,7 @@
 
 .hero-control {
   display: inline-flex;
-  height: 2.5rem;
+  height: 2.75rem;
   align-items: center;
   border: 1px solid var(--color-line-light);
   padding: 0 0.85rem;
@@ -646,20 +681,102 @@
 
 .phone-line {
   display: flex;
-  gap: 0.5rem;
+  align-items: stretch;
+  height: 3rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-surface);
+  background: var(--color-paper);
+  transition: border-color var(--duration-micro) var(--ease-out);
+}
+
+.phone-line:hover {
+  border-color: rgb(10 10 10 / 0.36);
+}
+
+.phone-line.is-invalid {
+  border-color: var(--color-seal);
 }
 
 .field-ddi {
-  width: 10.5rem;
-  max-width: 46%;
+  position: relative;
   flex: none;
-  padding-right: 1.75rem;
-  background-position: right 0.6rem center;
+}
+
+.field-ddi-button,
+.field-ddi-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.field-ddi-button {
+  height: 100%;
+  padding: 0 1.55rem 0 0.7rem;
+  border-right: 1px solid var(--color-line);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%230a0a0a' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.45rem center;
+  background-size: 0.6rem;
+}
+
+.field-ddi-flag {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.field-ddi-code {
+  font-size: 0.9375rem;
+  letter-spacing: -0.02em;
+}
+
+.field-ddi-list {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  width: min(20rem, 78vw);
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-surface);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-float);
+  padding: 0.25rem 0;
+}
+
+.field-ddi-region {
+  padding: 0.55rem 0.75rem 0.2rem;
+  color: var(--color-ink-soft);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.field-ddi-option {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.75rem;
+  text-align: left;
+}
+
+.field-ddi-option.is-active,
+.field-ddi-option[aria-selected="true"] {
+  background: var(--color-mist);
 }
 
 .field-phone {
   flex: 1;
   min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0 0.875rem;
+  color: var(--color-ink);
   font-variant-numeric: tabular-nums;
 }
 

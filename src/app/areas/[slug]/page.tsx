@@ -4,12 +4,10 @@ import { notFound } from "next/navigation";
 import { getPracticeArea, practiceAreas } from "@/content/areas";
 import { illustrationFor } from "@/content/visuals";
 import { AreaContact } from "@/components/site/area-contact";
-import { Breadcrumb } from "@/components/site/breadcrumb";
 import { PageBanner } from "@/components/site/page-banner";
 import { Reveal } from "@/components/site/reveal";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/container";
-import { Eyebrow, Heading } from "@/components/ui/heading";
 import { Prose } from "@/components/ui/prose";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema, serviceSchema } from "@/lib/seo/schema";
@@ -47,20 +45,20 @@ export default async function AreaPage({ params }: Props) {
 
   return (
     <>
-      <PageBanner image={visual} />
+      <PageBanner
+        image={visual}
+        crumbs={crumbs}
+        kicker="Itajaí / SC"
+        title={area.name}
+        line={area.lead}
+      />
       <Container className="py-16 md:py-24">
         <JsonLd data={serviceSchema(area)} />
         <JsonLd data={breadcrumbSchema(crumbs)} />
         <div className="grid items-start gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)]">
           <div className="min-w-0">
-            <Breadcrumb items={crumbs} />
-            <Eyebrow tone="seal">Itajaí / SC</Eyebrow>
-            <Heading level={1} className="mt-3 max-w-[18ch]">
-              {area.name}
-            </Heading>
-            <Prose className="mt-5">
-              <p>{area.lead}</p>
-              <p className="mt-4">{area.context}</p>
+            <Prose>
+              <p>{area.context}</p>
               <p className="mt-4">{area.reading}</p>
             </Prose>
 

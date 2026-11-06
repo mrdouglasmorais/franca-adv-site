@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { practiceAreas } from "@/content/areas";
+import { OfficeStage } from "@/components/site/office-stage";
 import { AreaCard } from "@/components/site/area-card";
 import { AreaMarquee } from "@/components/site/area-marquee";
 import { HeroStage } from "@/components/site/hero-stage";
@@ -9,32 +10,38 @@ import { LogoRail } from "@/components/site/client-carousel";
 const NationalAttendance = dynamic(() =>
   import("@/components/site/national-attendance").then((mod) => mod.NationalAttendance),
 );
-import { StatementRail } from "@/components/site/statement-rail";
 import { TeamGrid } from "@/components/site/team-grid";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow, Heading } from "@/components/ui/heading";
-
-const principles = [
-  {
-    title: "O que você reúne",
-    text: "Fatos, documentos e prazos. É o material com que a equipe começa.",
-  },
-  {
-    title: "Orientar ou processar",
-    text: "Orientar, para prevenir o conflito. Processar, quando a disputa já existe.",
-  },
-  {
-    title: "Onde e quando",
-    text: "No escritório em Itajaí, de segunda a sexta, das 8h às 18h. Nos outros estados, o acompanhamento é remoto.",
-  },
-] as const;
 
 export default function HomePage() {
   return (
     <>
       <HeroStage />
       <AreaMarquee />
+
+      <section className="border-b border-line bg-seal text-on-seal" aria-labelledby="imobiliario-titulo">
+        <Container className="grid items-end gap-10 py-16 md:grid-cols-[1.25fr_0.75fr] md:py-24">
+          <div>
+            <Eyebrow tone="gold">Itajaí / SC</Eyebrow>
+            <Heading level={2} id="imobiliario-titulo" className="mt-3 max-w-[14ch] text-on-seal">
+              Direito Imobiliário
+            </Heading>
+            <p className="mt-5 max-w-[42ch] text-lg text-on-seal">
+              Compra, venda, locação e registro. O escritório lê a matrícula, o contrato e a posse.
+            </p>
+            <div className="mt-8">
+              <Button href="/areas/direito-imobiliario" tone="gold">
+                Ver esta área
+              </Button>
+            </div>
+          </div>
+          <p className="max-w-[34ch] text-[17px] leading-[1.6] text-on-seal">
+            Em Itajaí, o imóvel atravessa a rotina da cidade. A orientação fica no contrato. O processo entra quando a disputa já existe.
+          </p>
+        </Container>
+      </section>
 
       <section id="areas" className="section-in scroll-mt-(--header-height) border-b border-line" aria-labelledby="areas-titulo">
         <Container className="py-16 md:py-24">
@@ -57,32 +64,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <StatementRail />
-
-      <section className="section-in scroll-mt-(--header-height) border-b border-line" aria-labelledby="escritorio-titulo">
-        <Container className="grid gap-12 py-16 md:grid-cols-[0.9fr_1.1fr] md:py-24">
-          <div>
-            <Eyebrow>O escritório</Eyebrow>
-            <Heading level={2} id="escritorio-titulo" className="mt-3">
-              A leitura do caso começa em Itajaí
-            </Heading>
-          </div>
-          <div>
-            <p className="max-w-[62ch] text-[17px]">
-              Empresas e pessoas trazem o que aconteceu. A equipe olha os documentos e o prazo e
-              indica se cabe orientar ou processar.
-            </p>
-            <dl className="mt-8 divide-y divide-line border-y border-line">
-              {principles.map((item) => (
-                <div key={item.title} className="grid gap-2 py-5 sm:grid-cols-[14rem_1fr]">
-                  <dt className="font-medium">{item.title}</dt>
-                  <dd className="text-ink-soft">{item.text}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Container>
-      </section>
+      <OfficeStage />
 
       <section className="section-in scroll-mt-(--header-height) border-b border-line" aria-labelledby="equipe-titulo">
         <Container className="py-16 md:py-24">

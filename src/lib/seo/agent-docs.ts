@@ -16,8 +16,7 @@ const pages = [
   {
     path: "/areas",
     title: "Áreas de atuação",
-    description:
-      "Civil, família, trabalho, empresarial, franquias, contratos, assessoria jurídica empresarial e criminal.",
+    description: practiceAreas.map((area) => area.name.replace(/^Direito (de |das |do |dos )?/, "")).join(", ") + ".",
   },
   {
     path: "/equipe",

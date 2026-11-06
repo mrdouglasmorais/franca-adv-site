@@ -1,7 +1,14 @@
 export type DialOption = {
+  iso: string;
   code: string;
   name: string;
 };
+
+export function flagEmoji(iso: string) {
+  return [...iso.toUpperCase()]
+    .map((char) => String.fromCodePoint(0x1f1e6 + char.charCodeAt(0) - 65))
+    .join("");
+}
 
 export type DialGroup = {
   region: string;
@@ -11,104 +18,104 @@ export type DialGroup = {
 export const DIAL_GROUPS: DialGroup[] = [
   {
     region: "Brasil",
-    options: [{ code: "55", name: "Brasil" }],
+    options: [{ iso: "BR", code: "55", name: "Brasil" }],
   },
   {
     region: "América do Sul",
     options: [
-      { code: "54", name: "Argentina" },
-      { code: "591", name: "Bolívia" },
-      { code: "56", name: "Chile" },
-      { code: "57", name: "Colômbia" },
-      { code: "593", name: "Equador" },
-      { code: "592", name: "Guiana" },
-      { code: "595", name: "Paraguai" },
-      { code: "51", name: "Peru" },
-      { code: "597", name: "Suriname" },
-      { code: "598", name: "Uruguai" },
-      { code: "58", name: "Venezuela" },
+      { iso: "AR", code: "54", name: "Argentina" },
+      { iso: "BO", code: "591", name: "Bolívia" },
+      { iso: "CL", code: "56", name: "Chile" },
+      { iso: "CO", code: "57", name: "Colômbia" },
+      { iso: "EC", code: "593", name: "Equador" },
+      { iso: "GY", code: "592", name: "Guiana" },
+      { iso: "PY", code: "595", name: "Paraguai" },
+      { iso: "PE", code: "51", name: "Peru" },
+      { iso: "SR", code: "597", name: "Suriname" },
+      { iso: "UY", code: "598", name: "Uruguai" },
+      { iso: "VE", code: "58", name: "Venezuela" },
     ],
   },
   {
     region: "América do Norte e Central",
     options: [
-      { code: "506", name: "Costa Rica" },
-      { code: "53", name: "Cuba" },
-      { code: "503", name: "El Salvador" },
-      { code: "1", name: "EUA e Canadá" },
-      { code: "502", name: "Guatemala" },
-      { code: "509", name: "Haiti" },
-      { code: "504", name: "Honduras" },
-      { code: "52", name: "México" },
-      { code: "505", name: "Nicarágua" },
-      { code: "507", name: "Panamá" },
+      { iso: "CR", code: "506", name: "Costa Rica" },
+      { iso: "CU", code: "53", name: "Cuba" },
+      { iso: "SV", code: "503", name: "El Salvador" },
+      { iso: "US", code: "1", name: "EUA e Canadá" },
+      { iso: "GT", code: "502", name: "Guatemala" },
+      { iso: "HT", code: "509", name: "Haiti" },
+      { iso: "HN", code: "504", name: "Honduras" },
+      { iso: "MX", code: "52", name: "México" },
+      { iso: "NI", code: "505", name: "Nicarágua" },
+      { iso: "PA", code: "507", name: "Panamá" },
     ],
   },
   {
     region: "Europa",
     options: [
-      { code: "49", name: "Alemanha" },
-      { code: "43", name: "Áustria" },
-      { code: "32", name: "Bélgica" },
-      { code: "359", name: "Bulgária" },
-      { code: "45", name: "Dinamarca" },
-      { code: "421", name: "Eslováquia" },
-      { code: "386", name: "Eslovênia" },
-      { code: "34", name: "Espanha" },
-      { code: "358", name: "Finlândia" },
-      { code: "33", name: "França" },
-      { code: "30", name: "Grécia" },
-      { code: "31", name: "Países Baixos" },
-      { code: "36", name: "Hungria" },
-      { code: "353", name: "Irlanda" },
-      { code: "39", name: "Itália" },
-      { code: "352", name: "Luxemburgo" },
-      { code: "47", name: "Noruega" },
-      { code: "48", name: "Polônia" },
-      { code: "351", name: "Portugal" },
-      { code: "44", name: "Reino Unido" },
-      { code: "40", name: "Romênia" },
-      { code: "7", name: "Rússia" },
-      { code: "46", name: "Suécia" },
-      { code: "41", name: "Suíça" },
-      { code: "420", name: "Tchéquia" },
-      { code: "90", name: "Turquia" },
-      { code: "380", name: "Ucrânia" },
+      { iso: "DE", code: "49", name: "Alemanha" },
+      { iso: "AT", code: "43", name: "Áustria" },
+      { iso: "BE", code: "32", name: "Bélgica" },
+      { iso: "BG", code: "359", name: "Bulgária" },
+      { iso: "DK", code: "45", name: "Dinamarca" },
+      { iso: "SK", code: "421", name: "Eslováquia" },
+      { iso: "SI", code: "386", name: "Eslovênia" },
+      { iso: "ES", code: "34", name: "Espanha" },
+      { iso: "FI", code: "358", name: "Finlândia" },
+      { iso: "FR", code: "33", name: "França" },
+      { iso: "GR", code: "30", name: "Grécia" },
+      { iso: "NL", code: "31", name: "Países Baixos" },
+      { iso: "HU", code: "36", name: "Hungria" },
+      { iso: "IE", code: "353", name: "Irlanda" },
+      { iso: "IT", code: "39", name: "Itália" },
+      { iso: "LU", code: "352", name: "Luxemburgo" },
+      { iso: "NO", code: "47", name: "Noruega" },
+      { iso: "PL", code: "48", name: "Polônia" },
+      { iso: "PT", code: "351", name: "Portugal" },
+      { iso: "GB", code: "44", name: "Reino Unido" },
+      { iso: "RO", code: "40", name: "Romênia" },
+      { iso: "RU", code: "7", name: "Rússia" },
+      { iso: "SE", code: "46", name: "Suécia" },
+      { iso: "CH", code: "41", name: "Suíça" },
+      { iso: "CZ", code: "420", name: "Tchéquia" },
+      { iso: "TR", code: "90", name: "Turquia" },
+      { iso: "UA", code: "380", name: "Ucrânia" },
     ],
   },
   {
     region: "África",
     options: [
-      { code: "27", name: "África do Sul" },
-      { code: "244", name: "Angola" },
-      { code: "238", name: "Cabo Verde" },
-      { code: "20", name: "Egito" },
-      { code: "245", name: "Guiné-Bissau" },
-      { code: "258", name: "Moçambique" },
-      { code: "234", name: "Nigéria" },
-      { code: "239", name: "São Tomé e Príncipe" },
+      { iso: "ZA", code: "27", name: "África do Sul" },
+      { iso: "AO", code: "244", name: "Angola" },
+      { iso: "CV", code: "238", name: "Cabo Verde" },
+      { iso: "EG", code: "20", name: "Egito" },
+      { iso: "GW", code: "245", name: "Guiné-Bissau" },
+      { iso: "MZ", code: "258", name: "Moçambique" },
+      { iso: "NG", code: "234", name: "Nigéria" },
+      { iso: "ST", code: "239", name: "São Tomé e Príncipe" },
     ],
   },
   {
     region: "Ásia e Oceania",
     options: [
-      { code: "61", name: "Austrália" },
-      { code: "86", name: "China" },
-      { code: "82", name: "Coreia do Sul" },
-      { code: "971", name: "Emirados Árabes" },
-      { code: "852", name: "Hong Kong" },
-      { code: "91", name: "Índia" },
-      { code: "62", name: "Indonésia" },
-      { code: "972", name: "Israel" },
-      { code: "81", name: "Japão" },
-      { code: "853", name: "Macau" },
-      { code: "60", name: "Malásia" },
-      { code: "64", name: "Nova Zelândia" },
-      { code: "63", name: "Filipinas" },
-      { code: "65", name: "Singapura" },
-      { code: "66", name: "Tailândia" },
-      { code: "670", name: "Timor-Leste" },
-      { code: "84", name: "Vietnã" },
+      { iso: "AU", code: "61", name: "Austrália" },
+      { iso: "CN", code: "86", name: "China" },
+      { iso: "KR", code: "82", name: "Coreia do Sul" },
+      { iso: "AE", code: "971", name: "Emirados Árabes" },
+      { iso: "HK", code: "852", name: "Hong Kong" },
+      { iso: "IN", code: "91", name: "Índia" },
+      { iso: "ID", code: "62", name: "Indonésia" },
+      { iso: "IL", code: "972", name: "Israel" },
+      { iso: "JP", code: "81", name: "Japão" },
+      { iso: "MO", code: "853", name: "Macau" },
+      { iso: "MY", code: "60", name: "Malásia" },
+      { iso: "NZ", code: "64", name: "Nova Zelândia" },
+      { iso: "PH", code: "63", name: "Filipinas" },
+      { iso: "SG", code: "65", name: "Singapura" },
+      { iso: "TH", code: "66", name: "Tailândia" },
+      { iso: "TL", code: "670", name: "Timor-Leste" },
+      { iso: "VN", code: "84", name: "Vietnã" },
     ],
   },
 ];
@@ -116,6 +123,15 @@ export const DIAL_GROUPS: DialGroup[] = [
 const DIAL_CODES = new Set(DIAL_GROUPS.flatMap((group) => group.options.map((option) => option.code)));
 
 const CODES_BY_LENGTH = [...DIAL_CODES].sort((a, b) => b.length - a.length);
+
+export function dialByCode(value: string) {
+  const code = callingCode(value);
+  for (const group of DIAL_GROUPS) {
+    const option = group.options.find((item) => item.code === code);
+    if (option) return option;
+  }
+  return DIAL_GROUPS[0].options[0];
+}
 
 export function callingCode(value: string) {
   return value.replace(/\D/g, "").replace(/^0+/, "");

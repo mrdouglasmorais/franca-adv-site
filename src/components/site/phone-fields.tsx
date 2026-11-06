@@ -1,7 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState, type ChangeEvent } from "react";
-import { DIAL_GROUPS, formatNational, maskPhoneValue, phonePlaceholder } from "@/lib/phone";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
+import { DIAL_GROUPS, dialByCode, flagEmoji, formatNational, maskPhoneValue, phonePlaceholder } from "@/lib/phone";
 
 type Props = {
   idPrefix: string;
@@ -12,8 +12,16 @@ type Props = {
 export function PhoneFields({ idPrefix, ddiError, phoneError }: Props) {
   const [ddi, setDdi] = useState("+55");
   const [phone, setPhone] = useState("");
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
   const phoneRef = useRef<HTMLInputElement>(null);
   const caretRef = useRef<number | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const queryRef = useRef("");
+  const queryTimer = useRef(0);
+  const listId = useId();
+  const options = DIAL_GROUPS.flatMap((group) => group.options);
+  const selected = dialByCode(ddi);
 
   useLayoutEffect(() => {
     const field = phoneRef.current;
@@ -23,10 +31,76 @@ export function PhoneFields({ idPrefix, ddiError, phoneError }: Props) {
     caretRef.current = null;
   }, [phone]);
 
-  function onDdiChange(event: ChangeEvent<HTMLSelectElement>) {
-    const next = event.target.value;
+  useEffect(() => {
+    if (!open) return;
+    function onPointer(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointer);
+    return () => document.removeEventListener("pointerdown", onPointer);
+  }, [open]);
+
+  const activeCode = options[active]?.code ?? "";
+
+  useEffect(() => {
+    if (!open || !activeCode) return;
+    document.getElementById(`${listId}-${activeCode}`)?.scrollIntoView({ block: "nearest" });
+  }, [open, activeCode, listId]);
+
+  function choose(code: string) {
+    const next = `+${code}`;
     setDdi(next);
     setPhone((current) => formatNational(next, current));
+    setOpen(false);
+  }
+
+  function onDdiKey(event: KeyboardEvent<HTMLButtonElement>) {
+    const last = options.length - 1;
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      setOpen(true);
+      setActive((current) => {
+        const start = open ? current : options.findIndex((item) => item.code === selected.code);
+        const base = start < 0 ? 0 : start;
+        return event.key === "ArrowDown" ? Math.min(last, base + 1) : Math.max(0, base - 1);
+      });
+      return;
+    }
+    if (event.key === "Home") {
+      event.preventDefault();
+      setOpen(true);
+      setActive(0);
+      return;
+    }
+    if (event.key === "End") {
+      event.preventDefault();
+      setOpen(true);
+      setActive(last);
+      return;
+    }
+    if (event.key === "Escape") {
+      setOpen(false);
+      return;
+    }
+    if ((event.key === "Enter" || event.key === " ") && open) {
+      event.preventDefault();
+      const option = options[active];
+      if (option) choose(option.code);
+      return;
+    }
+    if (/^\p{L}$/u.test(event.key)) {
+      event.preventDefault();
+      queryRef.current = `${queryRef.current}${event.key}`.toLocaleLowerCase("pt-BR");
+      window.clearTimeout(queryTimer.current);
+      queryTimer.current = window.setTimeout(() => {
+        queryRef.current = "";
+      }, 600);
+      const found = options.findIndex((item) => item.name.toLocaleLowerCase("pt-BR").startsWith(queryRef.current));
+      if (found >= 0) {
+        setOpen(true);
+        setActive(found);
+      }
+    }
   }
 
   function onPhoneChange(event: ChangeEvent<HTMLInputElement>) {
@@ -60,28 +134,66 @@ export function PhoneFields({ idPrefix, ddiError, phoneError }: Props) {
 
   return (
     <>
-      <div className="phone-line">
-        <select
-          id={`${idPrefix}-ddi`}
-          name="ddi"
-          value={ddi}
-          onChange={onDdiChange}
-          autoComplete="tel-country-code"
-          aria-label="DDI"
-          aria-invalid={ddiError ? true : undefined}
-          aria-describedby={ddiDescribedBy}
-          className="field field-select field-ddi"
-        >
-          {DIAL_GROUPS.map((group) => (
-            <optgroup key={group.region} label={group.region}>
-              {group.options.map((option) => (
-                <option key={option.code} value={`+${option.code}`}>
-                  +{option.code} {option.name}
-                </option>
+      <div className={`phone-line${ddiError || phoneError ? " is-invalid" : ""}`}>
+        <div className="field-ddi" ref={rootRef}>
+          <input type="hidden" name="ddi" value={ddi} autoComplete="tel-country-code" />
+          <button
+            type="button"
+            id={`${idPrefix}-ddi`}
+            className="field-ddi-button"
+            aria-label={`DDI ${selected.name} ${ddi}`}
+            aria-haspopup="listbox"
+            aria-expanded={open}
+            aria-controls={`${idPrefix}-ddi-list`}
+            aria-activedescendant={open ? `${listId}-${options[active]?.code}` : undefined}
+            aria-invalid={ddiError ? true : undefined}
+            aria-describedby={ddiDescribedBy}
+            onClick={() => {
+              setOpen((current) => !current);
+              setActive(Math.max(0, options.findIndex((item) => item.code === selected.code)));
+            }}
+            onKeyDown={onDdiKey}
+          >
+            <span className="field-ddi-flag" aria-hidden="true">
+              {flagEmoji(selected.iso)}
+            </span>
+            <span className="field-ddi-code">{ddi}</span>
+          </button>
+          {open ? (
+            <ul id={`${idPrefix}-ddi-list`} role="listbox" aria-label="DDI" className="field-ddi-list">
+              {DIAL_GROUPS.map((group) => (
+                <li key={group.region} role="presentation">
+                  <p className="field-ddi-region">{group.region}</p>
+                  <ul role="presentation">
+                    {group.options.map((option) => {
+                      const index = options.findIndex((item) => item.code === option.code);
+                      const isSelected = option.code === selected.code;
+                      return (
+                        <li key={option.code} role="presentation">
+                          <button
+                            type="button"
+                            id={`${listId}-${option.code}`}
+                            role="option"
+                            aria-selected={isSelected}
+                            className={`field-ddi-option${index === active ? " is-active" : ""}`}
+                            onMouseEnter={() => setActive(index)}
+                            onClick={() => choose(option.code)}
+                          >
+                            <span className="field-ddi-flag" aria-hidden="true">
+                              {flagEmoji(option.iso)}
+                            </span>
+                            <span className="field-ddi-code">+{option.code}</span>
+                            <span>{option.name}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
               ))}
-            </optgroup>
-          ))}
-        </select>
+            </ul>
+          ) : null}
+        </div>
         <input
           ref={phoneRef}
           id={`${idPrefix}-phone`}
@@ -97,7 +209,7 @@ export function PhoneFields({ idPrefix, ddiError, phoneError }: Props) {
           onChange={onPhoneChange}
           aria-invalid={phoneError ? true : undefined}
           aria-describedby={phoneDescribedBy}
-          className="field field-phone"
+          className="field-phone"
         />
       </div>
       {ddiError ? (

@@ -51,6 +51,38 @@ export const practiceAreas: readonly PracticeArea[] = [
       "Direito Civil em Itajaí/SC: patrimônio, responsabilidade civil, posse, propriedade e obrigações.",
   },
   {
+    slug: "direito-imobiliario",
+    name: "Direito Imobiliário",
+    summary: "Compra, venda, locação, posse e o que a matrícula registra.",
+    lead: "Compra, venda, locação e o que a matrícula do imóvel registra.",
+    context:
+      "O escritório lê o contrato, a matrícula e a posse. Em Itajaí, a demanda chega na compra, na locação ou quando o uso do imóvel já está em disputa. A orientação pode ficar no contrato. O processo entra quando a disputa já existe.",
+    reading: "Não há previsão de resultado. Cada caso depende do registro, do contrato e do que ainda pode ser pedido.",
+    problems: [
+      {
+        title: "Compra e venda",
+        detail: "Preço, prazo, condição e o que a matrícula diz antes da escritura.",
+      },
+      {
+        title: "Locação",
+        detail: "Contrato, garantia, renovação e desocupação de imóvel urbano.",
+      },
+      {
+        title: "Posse e registro",
+        detail: "Quem usa o imóvel e o que está inscrito no registro.",
+      },
+    ],
+    documents: [
+      "Matrícula atualizada do imóvel",
+      "Contrato de compra, venda ou locação",
+      "Comprovantes de pagamento e notificações",
+    ],
+    norm: "Lei nº 8.245/1991, para locação de imóvel urbano.",
+    seoTitle: "Direito Imobiliário em Itajaí",
+    seoDescription:
+      "Direito Imobiliário em Itajaí/SC: compra, venda, locação, posse e registro de imóveis.",
+  },
+  {
     slug: "direito-de-familia",
     name: "Direito de Família",
     summary: "Divórcio, guarda, alimentos, visitas, união estável e inventário.",

@@ -1,8 +1,16 @@
 import Link from "next/link";
 
-export function Breadcrumb({ items }: { items: { name: string; path: string }[] }) {
+export function Breadcrumb({
+  items,
+  tone = "light",
+}: {
+  items: { name: string; path: string }[];
+  tone?: "light" | "dark";
+}) {
+  const muted = tone === "dark" ? "text-gold-soft" : "text-ink-soft";
+  const current = tone === "dark" ? "text-paper" : "text-ink";
   return (
-    <nav aria-label="Trilha" className="text-sm text-ink-soft">
+    <nav aria-label="Trilha" className={`text-sm ${muted}`}>
       <ol className="flex flex-wrap gap-x-2 gap-y-1">
         {items.map((item, index) => {
           const last = index === items.length - 1;
@@ -10,7 +18,7 @@ export function Breadcrumb({ items }: { items: { name: string; path: string }[] 
             <li key={item.path} className="flex items-center gap-2">
               {index > 0 ? <span aria-hidden="true">/</span> : null}
               {last ? (
-                <span aria-current="page" className="text-ink">
+                <span aria-current="page" className={current}>
                   {item.name}
                 </span>
               ) : (
