@@ -77,7 +77,9 @@
   .hero-tab-bar,
   .statement-wipe,
   .seat-ring,
-  .logo-rail-track {
+  .logo-rail-track,
+  .team-portrait,
+  .team-frame {
     animation: none !important;
     transform: none !important;
     clip-path: none !important;
@@ -168,6 +170,42 @@
 .hero-caption {
   display: inline-block;
   animation: rise 640ms var(--ease-out);
+}
+
+.team-card {
+  position: relative;
+}
+
+.team-card:hover,
+.team-card:focus-within {
+  z-index: 1;
+}
+
+.team-frame {
+  transition: transform 420ms var(--ease-out);
+}
+
+.group:hover .team-frame,
+.group:focus-visible .team-frame {
+  transform: scale(1.045);
+}
+
+.team-portrait {
+  transition: transform 420ms var(--ease-out);
+}
+
+.group:hover .team-portrait,
+.group:focus-visible .team-portrait {
+  transform: scale(1.08);
+}
+
+.team-name {
+  transition: color 180ms var(--ease-out);
+}
+
+.group:hover .team-name,
+.group:focus-visible .team-name {
+  color: var(--color-seal);
 }
 
 .team-card-arrow {
