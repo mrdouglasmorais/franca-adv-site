@@ -26,6 +26,7 @@ export function PageBanner({
         priority
         sizes="100vw"
         className="object-cover image-drift"
+        draggable={false}
       />
       <div className="page-banner-shade" aria-hidden="true" />
       <Container className="relative py-12 md:py-16">

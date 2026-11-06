@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { firm } from "@/content/firm";
 import { getTeamMember, initialsOf, team } from "@/content/team";
 import { Breadcrumb } from "@/components/site/breadcrumb";
 import { CareerTimeline, FocusFlags } from "@/components/site/career-timeline";
+import { PortraitSlides } from "@/components/site/portrait-slides";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -49,14 +49,13 @@ export default async function TeamMemberPage({ params }: Props) {
       <Breadcrumb items={crumbs} />
       <div className="mt-10 grid items-start gap-10 md:grid-cols-[minmax(16rem,22rem)_1fr]">
         <div className="image-frame relative aspect-[4/5] overflow-hidden bg-ink">
-          {member.photo ? (
-            <Image
-              src={member.photo}
-              alt={member.name}
-              fill
-              priority
+          {member.photos?.length ? (
+            <PortraitSlides
+              photos={member.photos}
+              name={member.name}
+              controls={member.photos.length > 1}
               sizes="(min-width: 768px) 22rem, 100vw"
-              className="object-cover object-top"
+              priority
             />
           ) : (
             <div className="grid h-full place-items-center text-gold-soft">

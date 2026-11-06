@@ -40,6 +40,7 @@ export function HeroStage() {
                 loading={itemIndex === 0 && carousel.index === 0 ? undefined : current ? "eager" : "lazy"}
                 sizes="100vw"
                 className="object-cover hero-drift"
+                draggable={false}
               />
             </div>
           );

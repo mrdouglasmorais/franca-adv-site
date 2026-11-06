@@ -44,6 +44,11 @@
     text-rendering: optimizeLegibility;
   }
 
+  img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-seal);
     outline-offset: 2px;
@@ -79,7 +84,8 @@
   .seat-ring,
   .logo-rail-track,
   .team-portrait,
-  .team-frame {
+  .team-frame,
+  .team-photo {
     animation: none !important;
     transform: none !important;
     clip-path: none !important;
@@ -405,13 +411,71 @@
   height: auto;
 }
 
-.brazil-geo.is-home:not([aria-pressed="true"]) {
-  fill: var(--color-seal-soft);
+.brazil-geo.is-present:not([aria-pressed="true"]) {
+  fill: color-mix(in srgb, var(--color-seal) 46%, var(--color-paper));
+}
+
+.brazil-geo.is-principal:not([aria-pressed="true"]) {
+  fill: color-mix(in srgb, var(--color-seal) 18%, var(--color-paper));
+}
+
+.state-chip {
+  border: 1px solid var(--color-line);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  transition:
+    background-color 180ms var(--ease-out),
+    border-color 180ms var(--ease-out),
+    color 180ms var(--ease-out);
+}
+
+.state-chip.is-present {
+  border-color: var(--color-seal);
+}
+
+.state-chip.is-on,
+.state-chip[aria-pressed="true"] {
+  border-color: var(--color-seal);
+  background: var(--color-seal);
+  color: var(--color-on-seal);
+}
+
+.map-swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 1px solid rgb(10 10 10 / 0.28);
+  background: var(--color-paper);
+}
+
+.map-swatch.is-present {
+  border-color: var(--color-seal);
+  background: color-mix(in srgb, var(--color-seal) 46%, var(--color-paper));
+}
+
+.map-swatch.is-principal {
+  border-color: var(--color-seal);
+  background: color-mix(in srgb, var(--color-seal) 18%, var(--color-paper));
+}
+
+.team-stage {
+  min-width: 0;
+}
+
+.team-photo {
+  transform-origin: center top;
+  animation:
+    team-photo-in 520ms var(--ease-out) both,
+    drift 9s linear 520ms alternate infinite;
+}
+
+@keyframes team-photo-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .brazil-geo:hover,
 .brazil-geo:focus-visible {
-  fill: var(--color-seal-soft);
+  fill: color-mix(in srgb, var(--color-seal) 62%, var(--color-paper));
   stroke: var(--color-seal);
 }
 
@@ -512,8 +576,15 @@
   width: max-content;
   align-items: center;
   gap: 4.5rem;
-  padding: 1.75rem 2rem;
-  animation: marquee 36s linear infinite;
+  padding: 1.5rem 0;
+  animation: marquee 64s linear infinite;
+}
+
+.logo-rail-item {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-rail:hover .logo-rail-track,
@@ -522,9 +593,17 @@
 }
 
 .logo-rail-item img {
-  height: 2.25rem;
   width: auto;
-  opacity: 0.78;
+  height: auto;
+  max-width: 8rem;
+  max-height: 2rem;
+  object-fit: contain;
+  filter: grayscale(1);
+  transition: filter var(--duration-micro) var(--ease-standard);
+}
+
+.logo-rail-item:hover img {
+  filter: none;
 }
 
 .marquee {
@@ -565,9 +644,147 @@
   animation: menu-in 420ms var(--ease-out);
 }
 
+.menu-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    color var(--duration-micro) var(--ease-standard),
+    background-color var(--duration-micro) var(--ease-standard);
+}
+
+.menu-link:hover,
+.menu-link:focus-visible {
+  background: var(--color-mist);
+  color: var(--color-seal);
+}
+
 .menu-link[aria-current="page"] {
   font-weight: 600;
   box-shadow: inset 3px 0 0 var(--color-seal);
+}
+
+.nav-links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 2.75rem;
+  padding-inline: 0.45rem;
+  color: var(--color-paper);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color var(--duration-micro) var(--ease-standard);
+}
+
+@media (min-width: 1280px) {
+  .nav-links {
+    gap: 0.65rem;
+  }
+
+  .nav-link {
+    padding-inline: 0.55rem;
+    font-size: 0.8125rem;
+  }
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link[aria-current="page"] {
+  color: var(--color-gold-soft);
+}
+
+.nav-links:hover .nav-link[aria-current="page"]:not(:hover) {
+  color: var(--color-paper);
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 0.55rem;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: var(--color-gold);
+  transform: translate3d(0, 0, 0) scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+.nav-indicator.is-armed {
+  transition: transform var(--duration-micro) var(--ease-out);
+}
+
+.nav-nexo {
+  display: inline-flex;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-left: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-gold) 55%, transparent);
+  padding: 0 0.7rem 0 0.8rem;
+  color: var(--color-gold-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duration-micro) var(--ease-standard),
+    color var(--duration-micro) var(--ease-standard),
+    border-color var(--duration-micro) var(--ease-standard);
+}
+
+@media (min-width: 1280px) {
+  .nav-nexo {
+    height: 2.75rem;
+    margin-left: 1.15rem;
+    padding: 0 0.85rem 0 0.95rem;
+    font-size: 0.8125rem;
+  }
+}
+
+.nav-nexo-icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  transition: transform var(--duration-micro) var(--ease-out);
+}
+
+.nav-nexo:hover,
+.nav-nexo:focus-visible {
+  border-color: var(--color-seal);
+  background: var(--color-seal);
+  color: var(--color-on-seal);
+}
+
+.nav-nexo:hover .nav-nexo-icon,
+.nav-nexo:focus-visible .nav-nexo-icon {
+  transform: translate(2px, -2px);
+}
+
+.menu-panel .nav-nexo {
+  width: 100%;
+  margin-top: 1.5rem;
+  margin-left: 0;
+}
+
+.nav-menu-button {
+  transition: color var(--duration-micro) var(--ease-standard);
+}
+
+.nav-menu-button:hover,
+.nav-menu-button:focus-visible {
+  color: var(--color-gold-soft);
 }
 
 .site-header {
@@ -1238,25 +1455,3 @@
   }
 }
 
-@utility nav-link {
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -0.35rem;
-    left: 0;
-    height: 1px;
-    background: var(--color-gold);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform var(--duration-micro) var(--ease-out);
-  }
-
-  &:hover::after,
-  &:focus-visible::after,
-  &[aria-current="page"]::after {
-    transform: scaleX(1);
-  }
-}

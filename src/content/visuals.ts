@@ -32,7 +32,7 @@ export const illustrations: readonly Illustration[] = [
     src: "/image/hero/ilustration-d.webp",
     alt: "Ilustração de um corredor escuro com sala ao fundo e o brasão do escritório",
     kicker: "Presença",
-    line: "Sede em Itajaí. Acompanhamento remoto nos outros estados.",
+    line: "Sede em Itajaí. Presencial em SC, PR e RS.",
   },
 ] as const;
 
@@ -59,7 +59,7 @@ export const officeSlides = [
     ...illustrations[3],
     kicker: "Sede",
     title: "Sede em Itajaí",
-    line: "A sede é em Itajaí/SC. Nos outros estados, o acompanhamento é remoto.",
+    line: "A sede é em Itajaí/SC. O presencial cobre SC, PR e RS.",
   },
 ] as const;
 
@@ -86,7 +86,7 @@ export const statements = [
   {
     ...illustrations[2],
     title: "Onde e quando",
-    text: "No escritório em Itajaí, de segunda a sexta, das 8h às 18h. Nos outros estados, o acompanhamento é remoto.",
+    text: "No escritório em Itajaí, de segunda a sexta, das 8h às 18h. O presencial cobre SC, PR e RS.",
     href: "/equipe",
     action: "Ver a equipe",
   },

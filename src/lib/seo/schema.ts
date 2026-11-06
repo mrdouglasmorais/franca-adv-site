@@ -1,5 +1,6 @@
 import { practiceAreas } from "@/content/areas";
 import { firm, resolveSiteUrl } from "@/content/firm";
+import { brazilStates, principalUfs } from "@/content/states";
 import type { TeamMember } from "@/content/team";
 
 function id(fragment: string) {
@@ -42,7 +43,10 @@ export function organizationGraph() {
         address: postalAddress(),
         areaServed: [
           { "@type": "City", name: "Itajaí" },
-          { "@type": "State", name: "Santa Catarina" },
+          ...principalUfs.map((uf) => ({
+            "@type": "State",
+            name: brazilStates.find((state) => state.uf === uf)?.name ?? uf,
+          })),
         ],
         hasMap: firm.mapUrl,
         openingHoursSpecification: {
@@ -131,7 +135,7 @@ export function personSchema(member: TeamMember) {
     url,
     worksFor: { "@id": `${resolveSiteUrl()}/#organization` },
     ...(member.oab ? { identifier: member.oab } : {}),
-    ...(member.photo ? { image: `${resolveSiteUrl()}${member.photo}` } : {}),
+    ...(member.photos?.[0] ? { image: `${resolveSiteUrl()}${member.photos[0]}` } : {}),
     ...(member.curriculum ? { knowsAbout: member.curriculum.focus } : {}),
   };
 }

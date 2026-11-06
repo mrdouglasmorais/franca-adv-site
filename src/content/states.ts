@@ -1,3 +1,18 @@
+/** Atuação principal, na ordem em que o escritório apresenta. */
+export const principalUfs = ["SC", "PR", "RS", "SP", "RJ", "BA"] as const;
+
+/** Presencial do próprio escritório. SP, RJ e BA seguem com correspondente. */
+export const inPersonUfs = ["SC", "PR", "RS"] as const;
+
+export type AttendanceMode = "sede" | "presencial" | "principal" | "remoto";
+
+export function attendanceMode(uf: string): AttendanceMode {
+  if (uf === "SC") return "sede";
+  if ((inPersonUfs as readonly string[]).includes(uf)) return "presencial";
+  if ((principalUfs as readonly string[]).includes(uf)) return "principal";
+  return "remoto";
+}
+
 export const brazilStates = [
   { uf: "AC", name: "Acre" },
   { uf: "AL", name: "Alagoas" },

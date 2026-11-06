@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { firm } from "@/content/firm";
 import { Breadcrumb } from "@/components/site/breadcrumb";
 import { TeamGrid } from "@/components/site/team-grid";
@@ -24,17 +25,34 @@ export default function TeamPage() {
   return (
     <Container className="py-16 md:py-24">
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <Breadcrumb items={crumbs} />
-      <Eyebrow tone="seal">
-        {firm.address.city} / {firm.address.region}
-      </Eyebrow>
-      <Heading level={1} className="mt-3 max-w-[16ch]">
-        Quem atende você
-      </Heading>
-      <p className="mt-4 max-w-[42ch] text-ink-soft">
-        Advogados da OAB/SC e a equipe do escritório em Itajaí.
-      </p>
-      <div className="mt-12">
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,28rem)] lg:gap-16">
+        <div>
+          <Breadcrumb items={crumbs} />
+          <Eyebrow tone="seal">
+            {firm.address.city} / {firm.address.region}
+          </Eyebrow>
+          <Heading level={1} className="mt-3 max-w-[16ch]">
+            Quem atende você
+          </Heading>
+          <p className="mt-4 max-w-[42ch] text-ink-soft">
+            Advogados da OAB/SC e a equipe do escritório em Itajaí.
+          </p>
+        </div>
+        <figure className="team-stage">
+          <div className="image-frame relative aspect-[9/16] bg-ink">
+            <Image
+              src="/team/time.jpeg"
+              alt="Equipe do escritório em Itajaí"
+              fill
+              sizes="(min-width: 1024px) 28rem, 100vw"
+              className="team-photo object-cover object-top"
+              priority
+              draggable={false}
+            />
+          </div>
+        </figure>
+      </div>
+      <div className="mt-16 md:mt-24">
         <TeamGrid />
       </div>
     </Container>

@@ -2,13 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { firm, nav } from "@/content/firm";
 
 function isCurrent(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function NexoIcon() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden="true" className="nav-nexo-icon">
+      <path
+        d="M6 3.5H3.5v9h9V10M8 3.5h4.5V8M12.5 3.5 7 9"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
 }
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -43,6 +57,36 @@ export function SiteNav() {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const firstLink = useRef<HTMLAnchorElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
+  const [mark, setMark] = useState({ x: 0, w: 0 });
+  const [armed, setArmed] = useState(false);
+
+  const place = useCallback((target: HTMLElement | null) => {
+    const root = linksRef.current;
+    if (!root || !target) return;
+    const rootBox = root.getBoundingClientRect();
+    const box = target.getBoundingClientRect();
+    setMark({ x: box.left - rootBox.left, w: box.width });
+  }, []);
+
+  const placeCurrent = useCallback(() => {
+    const current = linksRef.current?.querySelector<HTMLElement>('[aria-current="page"]');
+    place(current ?? null);
+  }, [place]);
+
+  useLayoutEffect(() => {
+    placeCurrent();
+    const frame = requestAnimationFrame(() => setArmed(true));
+    return () => cancelAnimationFrame(frame);
+  }, [placeCurrent, pathname]);
+
+  useEffect(() => {
+    const root = linksRef.current;
+    if (!root) return;
+    const observer = new ResizeObserver(() => placeCurrent());
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, [placeCurrent]);
 
   useEffect(() => {
     if (!open) return;
@@ -81,24 +125,43 @@ export function SiteNav() {
 
   return (
     <>
-      <nav aria-label="Principal" className="hidden items-center gap-5 xl:gap-7 lg:flex">
-        {nav.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-            className="nav-link text-sm whitespace-nowrap text-paper"
-          >
-            {item.label}
-          </Link>
-        ))}
+      <nav aria-label="Principal" className="hidden items-center lg:flex">
+        <div
+          ref={linksRef}
+          className="nav-links"
+          onMouseLeave={placeCurrent}
+          onBlur={(event) => {
+            const next = event.relatedTarget;
+            if (!(next instanceof Node) || !event.currentTarget.contains(next)) placeCurrent();
+          }}
+        >
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
+              className="nav-link"
+              onMouseEnter={(event) => place(event.currentTarget)}
+              onFocus={(event) => place(event.currentTarget)}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <span
+            className={`nav-indicator${armed ? " is-armed" : ""}`}
+            aria-hidden="true"
+            style={{ transform: `translate3d(${mark.x}px, 0, 0) scaleX(${mark.w})` }}
+          />
+        </div>
         <a
           href={firm.nexoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-11 items-center rounded-full bg-seal px-4 text-sm font-medium whitespace-nowrap text-on-seal transition-colors duration-200 ease-out hover:bg-seal-deep"
+          className="nav-nexo"
+          aria-label="Nexo, abre em nova aba"
         >
           Nexo
+          <NexoIcon />
         </a>
       </nav>
 
@@ -106,7 +169,7 @@ export function SiteNav() {
         <button
           ref={buttonRef}
           type="button"
-          className="relative z-10 inline-flex size-11 items-center justify-center text-paper"
+          className="nav-menu-button relative z-10 inline-flex size-11 items-center justify-center text-paper"
           aria-expanded={open}
           aria-controls={open ? panelId : undefined}
           aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -136,7 +199,7 @@ export function SiteNav() {
                   ref={index === 0 ? firstLink : undefined}
                   href={item.href}
                   aria-current={isCurrent(pathname, item.href) ? "page" : undefined}
-                  className="menu-link flex min-h-11 items-center border-b border-line py-3 pl-3 text-lg text-ink"
+                  className="menu-link flex min-h-12 items-center border-b border-line py-3 pl-3 text-ink"
                   onClick={() => setOpenPath(null)}
                 >
                   {item.label}
@@ -146,10 +209,12 @@ export function SiteNav() {
                 href={firm.nexoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex h-12 items-center justify-center rounded-full bg-seal text-sm font-medium text-on-seal"
+                className="nav-nexo"
+                aria-label="Acessar o Nexo, abre em nova aba"
                 onClick={() => setOpenPath(null)}
               >
                 Acessar o Nexo
+                <NexoIcon />
               </a>
             </nav>
               </>,

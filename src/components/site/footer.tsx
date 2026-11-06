@@ -28,11 +28,12 @@ export function Footer() {
             height={firm.assets.wordmarkHeight}
             className="h-8 w-auto"
             sizes="220px"
+            draggable={false}
           />
           <p className="mt-4 max-w-[48ch] text-sm leading-6 text-gold-soft">
             {firm.name} atua de forma consultiva e contenciosa para empresas e pessoas. A sede é em{" "}
-            {firm.address.city}/{firm.address.region}, com acompanhamento remoto para clientes de
-            outros estados.
+            {firm.address.city}/{firm.address.region}. O presencial cobre Santa Catarina, Paraná e Rio
+            Grande do Sul.
           </p>
           <dl className="mt-8 grid grid-cols-3 gap-4">
             <div>
@@ -146,8 +147,20 @@ export function Footer() {
       </Container>
 
       <Container className="border-b border-line-light py-10">
-        <p className="text-sm text-gold-soft">{firm.entity}</p>
-        <p className="mt-1 text-sm">CNPJ {firm.cnpj}</p>
+        <div className="flex items-start justify-between gap-6 md:gap-8">
+          <div>
+            <p className="text-sm text-gold-soft">{firm.entity}</p>
+            <p className="mt-1 text-sm whitespace-nowrap">CNPJ {firm.cnpj}</p>
+          </div>
+          <Image
+            src="/seal/seal.png"
+            alt="Selo de excelência Ferreira França Advogados, desde 2016"
+            width={1254}
+            height={1254}
+            className="h-[8.4rem] w-[8.4rem] shrink-0 md:h-[10.8rem] md:w-[10.8rem]"
+            draggable={false}
+          />
+        </div>
         <div className="mt-5 space-y-4">
           {groups.map((group) => (
             <div key={group.uf}>
@@ -182,7 +195,24 @@ export function Footer() {
             de resultado. Cada caso depende de análise individual.
           </p>
         </div>
-        <BackToTopButton />
+        <div className="flex items-center gap-4">
+          <a
+            href="https://www.oab.org.br/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center"
+          >
+            <Image
+              src="/brand/oab.png"
+              alt="Ordem dos Advogados do Brasil"
+              width={446}
+              height={212}
+              className="h-11 w-auto"
+              draggable={false}
+            />
+          </a>
+          <BackToTopButton />
+        </div>
       </Container>
     </footer>
   );

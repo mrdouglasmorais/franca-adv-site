@@ -25,7 +25,7 @@ export type TeamMember = {
   oab?: string;
   summary: string;
   paragraphs: readonly string[];
-  photo?: string;
+  photos?: readonly string[];
   curriculum?: Curriculum;
 };
 
@@ -35,7 +35,7 @@ export const team: readonly TeamMember[] = [
     name: "Maicon Ferreira França",
     role: "Fundador e CEO",
     oab: "OAB/SC 52540",
-    photo: "/team/maicon.jpg",
+    photos: ["/team/maicon-1.jpeg", "/team/maicon-2.jpeg"],
     summary:
       "Fundador do escritório. Graduado em Direito e Administração pela UNIVALI, com pós-graduação em Direito Empresarial e Direito Civil.",
     paragraphs: [
@@ -110,6 +110,7 @@ export const team: readonly TeamMember[] = [
     name: "Maria Alice Gomes Marques",
     role: "Advogada associada",
     oab: "OAB/SC 061535-B",
+    photos: ["/team/maria-alice.jpeg"],
     summary:
       "Advogada associada em Itajaí. Graduada pela ULBRA em 2005, com especialização em Direito Público, Direito Processual Penal e Direito Imobiliário.",
     paragraphs: [
@@ -154,6 +155,7 @@ export const team: readonly TeamMember[] = [
     name: "Monike Eva Oliveira Araujo",
     role: "Advogada",
     oab: "OAB/SC 075307",
+    photos: ["/team/monike.jpeg"],
     summary:
       "Advogada em Itajaí. Graduada pela UNIVALI em 2018, com pós-graduação em Direito Processual Civil e Direito Imobiliário.",
     paragraphs: [
@@ -210,6 +212,7 @@ export const team: readonly TeamMember[] = [
     slug: "edivania-fonseca-mota",
     name: "Edivânia Fonseca Mota",
     role: "Assistente jurídica",
+    photos: ["/team/edvania.jpeg"],
     summary:
       "Assistente jurídica do escritório. Bacharel em Administração e pós-graduada em Gestão Pública. Cursa Direito na UNIASSELVI, em fase de conclusão.",
     paragraphs: [
@@ -270,6 +273,7 @@ export const team: readonly TeamMember[] = [
     slug: "sabrina-soares-melo",
     name: "Sabrina Soares Melo",
     role: "Estagiária de Direito",
+    photos: ["/team/sabrina.jpeg", "/team/sabrina-2.jpeg"],
     summary: "Estagiária de Direito do escritório. Acadêmica de Direito na UNIASSELVI.",
     paragraphs: [
       "Estagiária de Direito do escritório. Cursa Direito no Centro Universitário Leonardo da Vinci (UNIASSELVI).",
@@ -312,6 +316,7 @@ export const team: readonly TeamMember[] = [
     slug: "celso-schaadt-neto",
     name: "Celso Schaadt Neto",
     role: "Jurídico",
+    photos: ["/team/neto.jpeg", "/team/neto-2.jpeg", "/team/neto-3.jpeg"],
     summary:
       "Integra a equipe jurídica do escritório, na área criminal. Bacharelando em Direito pela UNIASSELVI.",
     paragraphs: [
@@ -340,6 +345,7 @@ export const team: readonly TeamMember[] = [
     slug: "fabiana-de-lima-berwanger",
     name: "Fabiana de Lima Berwanger",
     role: "Financeiro",
+    photos: ["/team/fabi-1.jpeg", "/team/fabi-2.jpeg", "/team/fabi-3.jpeg"],
     summary: "Cuida da área financeira do escritório.",
     paragraphs: ["Cuida da área financeira do escritório em Itajaí."],
   },

@@ -123,7 +123,8 @@ export function llmsTxt() {
     "- Cada página HTML também responde `text/markdown` quando `Accept` prefere `text/markdown` a `text/html`.",
     "- O tipo do site é `business`.",
     "- Não há API pública de atendimento. O contato é o formulário em /contato, o telefone ou o WhatsApp.",
-    "- Não atribuir número de processos, nome de cliente ou resultado de causa. Isso não está publicado.",
+    "- Clientes publicados: Incorpora Engenharia, Bravo, Vaapty, Cliomed, Auto Moov e Luci Luci. Não atribuir outro nome de cliente, número de processos ou resultado de causa.",
+    "- Atendimento presencial: Santa Catarina, Paraná e Rio Grande do Sul. Atuação principal, com correspondente: São Paulo, Rio de Janeiro e Bahia. Nos demais estados, o acompanhamento é remoto. Inscrições vigentes: OAB/SC.",
     "",
   ].join("\n");
 }

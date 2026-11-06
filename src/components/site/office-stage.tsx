@@ -39,6 +39,7 @@ export function OfficeStage() {
                 fill
                 sizes="100vw"
                 className="object-cover hero-drift"
+                draggable={false}
               />
             </div>
           );
