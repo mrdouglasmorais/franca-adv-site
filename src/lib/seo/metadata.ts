@@ -25,7 +25,11 @@ export function buildMetadata({
   return {
     title: absoluteTitle ? { absolute: resolvedTitle } : title,
     description,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: { "pt-BR": url },
+      types: { "text/markdown": url },
+    },
     openGraph: {
       title: resolvedTitle,
       description,
@@ -35,10 +39,11 @@ export function buildMetadata({
       type: "website",
       images: [
         {
-          url: "/opengraph-image",
+          url: absoluteUrl("/opengraph-image"),
           width: 1200,
           height: 630,
           alt: firm.seo.ogImageAlt,
+          type: "image/png",
         },
       ],
     },
@@ -46,7 +51,14 @@ export function buildMetadata({
       card: "summary_large_image",
       title: resolvedTitle,
       description,
-      images: ["/opengraph-image"],
+      images: [
+        {
+          url: absoluteUrl("/opengraph-image"),
+          width: 1200,
+          height: 630,
+          alt: firm.seo.ogImageAlt,
+        },
+      ],
     },
     robots: {
       index: true,

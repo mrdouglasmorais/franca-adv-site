@@ -6,7 +6,7 @@ import { team } from "@/content/team";
 export default function sitemap(): MetadataRoute.Sitemap {
   const origin = resolveSiteUrl();
   const now = new Date();
-  const staticPaths = ["", "/areas", "/equipe", "/contato", "/carreiras", "/publicacoes", "/privacidade"];
+  const staticPaths = ["", "/areas", "/equipe", "/contato", "/carreiras", "/publicacoes", "/privacidade", "/llms.txt"];
 
   return [
     ...staticPaths.map((path) => ({

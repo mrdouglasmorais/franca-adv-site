@@ -12,6 +12,7 @@ import { useCarousel } from "@/components/site/use-carousel";
 export function HeroStage() {
   const carousel = useCarousel(illustrations.length);
   const slide = illustrations[carousel.index];
+  const nextIndex = (carousel.index + 1) % illustrations.length;
 
   return (
     <section
@@ -27,18 +28,23 @@ export function HeroStage() {
       }}
     >
       <div className="absolute inset-0" aria-hidden="true">
-        {illustrations.map((item, itemIndex) => (
-          <div key={item.src} className={`hero-slide ${itemIndex === carousel.index ? "is-on" : ""}`}>
-            <Image
-              src={item.src}
-              alt=""
-              fill
-              priority={itemIndex === 0}
-              sizes="100vw"
-              className="object-cover hero-drift"
-            />
-          </div>
-        ))}
+        {illustrations.map((item, itemIndex) => {
+          if (itemIndex !== carousel.index && itemIndex !== nextIndex) return null;
+          const current = itemIndex === carousel.index;
+          return (
+            <div key={item.src} className={`hero-slide ${current ? "is-on" : ""}`}>
+              <Image
+                src={item.src}
+                alt=""
+                fill
+                priority={itemIndex === 0 && carousel.index === 0}
+                loading={itemIndex === 0 && carousel.index === 0 ? undefined : current ? "eager" : "lazy"}
+                sizes="100vw"
+                className="object-cover hero-drift"
+              />
+            </div>
+          );
+        })}
         <div className="hero-shade" />
       </div>
 

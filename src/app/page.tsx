@@ -1,10 +1,14 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { practiceAreas } from "@/content/areas";
 import { AreaCard } from "@/components/site/area-card";
 import { AreaMarquee } from "@/components/site/area-marquee";
 import { HeroStage } from "@/components/site/hero-stage";
 import { LogoRail } from "@/components/site/client-carousel";
-import { NationalAttendance } from "@/components/site/national-attendance";
+
+const NationalAttendance = dynamic(() =>
+  import("@/components/site/national-attendance").then((mod) => mod.NationalAttendance),
+);
 import { StatementRail } from "@/components/site/statement-rail";
 import { TeamGrid } from "@/components/site/team-grid";
 import { Button } from "@/components/ui/button";

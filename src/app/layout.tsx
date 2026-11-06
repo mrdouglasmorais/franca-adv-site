@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   category: "Law",
   keywords: [...firm.seo.keywords],
   formatDetection: { telephone: true, email: true, address: true },
+  other: {
+    "is-agentic-site-type": "business",
+  },
 };
 
 export const viewport: Viewport = {

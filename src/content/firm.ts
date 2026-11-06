@@ -8,9 +8,25 @@ function trimTrailingSlash(url: string) {
   return url.replace(/\/$/, "");
 }
 
+function withHttps(hostOrUrl: string) {
+  const value = hostOrUrl.trim();
+  if (value.startsWith("http://") || value.startsWith("https://")) return trimTrailingSlash(value);
+  return `https://${trimTrailingSlash(value)}`;
+}
+
+/**
+ * Origem de canônico, Open Graph, sitemap e JSON-LD.
+ * NEXT_PUBLIC_SITE_URL vence. Na Vercel, sem essa variável, usa o domínio
+ * de produção do projeto para a imagem não apontar para outro site.
+ */
 export function resolveSiteUrl() {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (fromEnv) return trimTrailingSlash(fromEnv);
+  if (fromEnv) return withHttps(fromEnv);
+
+  const vercelHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() || process.env.VERCEL_URL?.trim();
+  if (vercelHost) return withHttps(vercelHost);
+
   return "https://adv.grupoferreirafranca.com.br";
 }
 

@@ -5,12 +5,19 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   experimental: {
     proxyClientMaxBodySize: "12mb",
     serverActions: { bodySizeLimit: "12mb" },
   },
   async headers() {
+    const cache = [
+      {
+        key: "Cache-Control",
+        value: "public, max-age=604800, stale-while-revalidate=2592000",
+      },
+    ];
     return [
       {
         source: "/:path*",
@@ -24,6 +31,12 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      { source: "/brand/:path*", headers: cache },
+      { source: "/image/:path*", headers: cache },
+      { source: "/team/:path*", headers: cache },
+      { source: "/clients/:path*", headers: cache },
+      { source: "/fav.png", headers: cache },
+      { source: "/opengraph-image", headers: cache },
     ];
   },
 };

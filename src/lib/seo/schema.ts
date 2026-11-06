@@ -17,6 +17,7 @@ export function organizationGraph() {
         name: firm.name,
         legalName: firm.legalName,
         url,
+        image: `${url}/opengraph-image`,
         logo: {
           "@type": "ImageObject",
           url: `${url}${firm.assets.wordmark}`,
@@ -33,7 +34,7 @@ export function organizationGraph() {
         "@id": id("/#legalservice"),
         name: firm.name,
         url,
-        image: `${url}/fav.png`,
+        image: `${url}/opengraph-image`,
         description: firm.description,
         telephone: firm.contact.phonePrimary,
         email: firm.contact.email,

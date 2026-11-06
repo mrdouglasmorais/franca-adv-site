@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
+import { firm } from "@/content/firm";
 
-export const alt = "Ferreira França Advogados e Associados — advocacia em Itajaí/SC";
+export const alt = firm.seo.ogImageAlt;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -20,11 +21,15 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 22, letterSpacing: 4, color: "#c5a46d" }}>
-          ADVOCACIA E ASSESSORIA EMPRESARIAL
+          {firm.tagline.toUpperCase()}
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 76, lineHeight: 1.05 }}>Ferreira França</div>
-          <div style={{ marginTop: 16, fontSize: 32, color: "#e8d9b5" }}>Advocacia em Itajaí / SC</div>
+          <div style={{ display: "flex", fontSize: 68, lineHeight: 1.05, maxWidth: 980 }}>
+            Ferreira França Advogados
+          </div>
+          <div style={{ display: "flex", marginTop: 20, fontSize: 32, color: "#e8d9b5" }}>
+            Advocacia em Itajaí
+          </div>
         </div>
         <div style={{ display: "flex", width: 96, height: 4, background: "#741b2c" }} />
       </div>
