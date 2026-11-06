@@ -1,0 +1,90 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { firm } from "@/content/firm";
+import { getTeamMember, initialsOf, team } from "@/content/team";
+import { Breadcrumb } from "@/components/site/breadcrumb";
+import { JsonLd } from "@/components/seo/json-ld";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Eyebrow, Heading } from "@/components/ui/heading";
+import { Prose } from "@/components/ui/prose";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { breadcrumbSchema, personSchema } from "@/lib/seo/schema";
+
+type Props = { params: Promise<{ slug: string }> };
+
+export function generateStaticParams() {
+  return team.map((member) => ({ slug: member.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const member = getTeamMember(slug);
+  if (!member) return {};
+  const oab = member.oab ? ` ${member.oab}.` : "";
+  return buildMetadata({
+    title: member.name,
+    description: `${member.name}, ${member.role} na Ferreira França Advogados em Itajaí/SC.${oab}`,
+    path: `/equipe/${member.slug}`,
+  });
+}
+
+export default async function TeamMemberPage({ params }: Props) {
+  const { slug } = await params;
+  const member = getTeamMember(slug);
+  if (!member) notFound();
+
+  const crumbs = [
+    { name: "Início", path: "/" },
+    { name: "Escritório", path: "/equipe" },
+    { name: member.name, path: `/equipe/${member.slug}` },
+  ];
+
+  return (
+    <Container className="py-16 md:py-24">
+      <JsonLd data={personSchema(member)} />
+      <JsonLd data={breadcrumbSchema(crumbs)} />
+      <Breadcrumb items={crumbs} />
+      <div className="mt-10 grid items-start gap-10 md:grid-cols-[minmax(16rem,22rem)_1fr]">
+        <div className="image-frame relative aspect-[4/5] overflow-hidden bg-ink">
+          {member.photo ? (
+            <Image
+              src={member.photo}
+              alt={member.name}
+              fill
+              priority
+              sizes="(min-width: 768px) 22rem, 100vw"
+              className="object-cover object-top"
+            />
+          ) : (
+            <div className="grid h-full place-items-center text-gold-soft">
+              <span className="font-display text-7xl font-medium tracking-tight">{initialsOf(member.name)}</span>
+            </div>
+          )}
+        </div>
+        <div>
+          <Eyebrow tone="seal">{firm.address.city} / {firm.address.region}</Eyebrow>
+          <Heading level={1} className="mt-3 max-w-[16ch]">
+            {member.name}
+          </Heading>
+          <p className="mt-3 text-sm tracking-[0.08em] text-ink-soft uppercase">
+            {member.role}
+            {member.oab ? ` · ${member.oab}` : ""}
+          </p>
+          <Prose className="mt-6">
+            <p>{member.summary}</p>
+          </Prose>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/contato" pill>
+              Falar com o escritório
+            </Button>
+            <Button href={firm.contact.whatsappUrl} tone="ghost">
+              Chamar no WhatsApp
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  );
+}

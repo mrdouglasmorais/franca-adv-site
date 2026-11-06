@@ -1,0 +1,87 @@
+"use client";
+
+import Image from "next/image";
+import { firm } from "@/content/firm";
+import { illustrations } from "@/content/visuals";
+import { SlideControls } from "@/components/site/slide-controls";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Eyebrow, Heading } from "@/components/ui/heading";
+import { useCarousel } from "@/components/site/use-carousel";
+
+export function HeroStage() {
+  const carousel = useCarousel(illustrations.length);
+  const slide = illustrations[carousel.index];
+
+  return (
+    <section
+      className="relative overflow-hidden bg-ink text-paper"
+      aria-roledescription="carrossel"
+      aria-label="Ilustrações do escritório"
+      onMouseEnter={() => carousel.setHovered(true)}
+      onMouseLeave={() => carousel.setHovered(false)}
+      onFocusCapture={() => carousel.setHovered(true)}
+      onBlurCapture={(event) => {
+        const next = event.relatedTarget;
+        if (!(next instanceof Node) || !event.currentTarget.contains(next)) carousel.setHovered(false);
+      }}
+    >
+      <div className="absolute inset-0" aria-hidden="true">
+        {illustrations.map((item, itemIndex) => (
+          <div key={item.src} className={`hero-slide ${itemIndex === carousel.index ? "is-on" : ""}`}>
+            <Image
+              src={item.src}
+              alt=""
+              fill
+              priority={itemIndex === 0}
+              sizes="100vw"
+              className="object-cover hero-drift"
+            />
+          </div>
+        ))}
+        <div className="hero-shade" />
+      </div>
+
+      <Container className="relative grid min-h-[calc(100svh-var(--header-height))] content-end gap-10 py-14 md:py-16">
+        <div className="max-w-[40rem]">
+          <Eyebrow tone="gold">
+            {firm.tagline} · {firm.address.city}/{firm.address.region}
+          </Eyebrow>
+          <div className="gold-draw mt-5" aria-hidden="true" />
+          <Heading level={1} className="mt-6 max-w-[16ch] text-paper">
+            Advocacia em Itajaí para empresas e pessoas
+          </Heading>
+          <p className="mt-6 max-w-[46ch] text-lg text-gold-soft" aria-live="polite">
+            <span key={slide.kicker} className="hero-caption">
+              {slide.line}
+            </span>
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/contato" pill>
+              Falar com o escritório
+            </Button>
+            <Button href="/areas" tone="gold">
+              Ver as áreas
+            </Button>
+          </div>
+        </div>
+        <SlideControls
+          slides={illustrations}
+          index={carousel.index}
+          paused={carousel.paused}
+          userPaused={carousel.userPaused}
+          onGo={carousel.go}
+          onPrev={carousel.prev}
+          onNext={carousel.next}
+          onTogglePause={() => carousel.setUserPaused((value) => !value)}
+        />
+        <a href="#areas" className="scroll-cue">
+          Próxima seção
+          <span className="scroll-cue-shaft" aria-hidden="true">
+            <span className="scroll-cue-dot" />
+          </span>
+        </a>
+      </Container>
+    </section>
+  );
+}
