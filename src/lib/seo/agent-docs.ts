@@ -26,7 +26,7 @@ const pages = [
   {
     path: "/publicacoes",
     title: "Publicações",
-    description: "Artigos do escritório. A lista fica vazia até haver um texto publicado.",
+    description: "Em breve, artigos do escritório. Acórdãos públicos do TJDFT por área — não são casos do escritório.",
   },
   {
     path: "/carreiras",
@@ -268,7 +268,7 @@ export function markdownForPath(pathname: string) {
     return [
       `# Publicações | ${firm.shortName}`,
       "",
-      "Os artigos do escritório entram aqui quando forem publicados. Não há textos provisórios.",
+      "Em breve, artigos do escritório. Acórdãos públicos do TJDFT por área — não são casos do escritório. Não é parecer.",
       "",
       `- [Falar com o escritório](${firm.contact.whatsappUrl})`,
       "",

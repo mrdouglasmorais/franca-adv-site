@@ -28,7 +28,7 @@ export default function AreasPage() {
       crumbs={crumbs}
       kicker="Itajaí / SC"
       title="Áreas de atuação"
-      line="Escolha a área. A página diz que tipo de demanda chega ao escritório."
+      line="Escolha a área e veja o tipo de demanda que chega ao escritório."
     />
     <Container className="py-16 md:py-24">
       <JsonLd data={breadcrumbSchema(crumbs)} />

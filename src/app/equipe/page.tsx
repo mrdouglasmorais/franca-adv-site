@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { firm } from "@/content/firm";
-import { Breadcrumb } from "@/components/site/breadcrumb";
+import { illustrations } from "@/content/visuals";
+import { PageBanner } from "@/components/site/page-banner";
 import { TeamGrid } from "@/components/site/team-grid";
+import { TeamStage } from "@/components/site/team-stage";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/container";
-import { Eyebrow, Heading } from "@/components/ui/heading";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { breadcrumbSchema } from "@/lib/seo/schema";
 
@@ -23,40 +23,24 @@ const crumbs = [
 
 export default function TeamPage() {
   return (
-    <Container className="py-16 md:py-24">
+    <>
+      <PageBanner
+        image={illustrations[2]}
+        crumbs={crumbs}
+        kicker={`${firm.address.city} / ${firm.address.region}`}
+        title="Quem atende você"
+        line="Advogados da OAB/SC e a equipe do escritório em Itajaí."
+      />
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,28rem)] lg:gap-16">
-        <div>
-          <Breadcrumb items={crumbs} />
-          <Eyebrow tone="seal">
-            {firm.address.city} / {firm.address.region}
-          </Eyebrow>
-          <Heading level={1} className="mt-3 max-w-[16ch]">
-            Quem atende você
-          </Heading>
-          <p className="mt-4 max-w-[42ch] text-ink-soft">
-            Advogados da OAB/SC e a equipe do escritório em Itajaí.
-          </p>
-        </div>
-        <figure className="team-stage">
-          <div className="image-frame relative aspect-[9/16] bg-ink">
-            <div className="team-photo">
-              <Image
-                src="/team/time.jpeg"
-                alt="Equipe do escritório em Itajaí"
-                fill
-                sizes="(min-width: 1024px) 28rem, 100vw"
-                className="object-cover object-top"
-                priority
-                draggable={false}
-              />
-            </div>
-          </div>
-        </figure>
-      </div>
-      <div className="mt-16 md:mt-24">
-        <TeamGrid />
-      </div>
-    </Container>
+      <TeamStage />
+      <section className="border-b border-line" aria-labelledby="equipe-lista-titulo">
+        <Container className="py-16 md:py-24">
+          <h2 id="equipe-lista-titulo" className="sr-only">
+            Integrantes da equipe
+          </h2>
+          <TeamGrid />
+        </Container>
+      </section>
+    </>
   );
 }

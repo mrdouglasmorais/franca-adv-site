@@ -32,7 +32,7 @@ export default function ContactPage() {
       crumbs={crumbs}
       kicker="Itajaí / SC"
       title="Fale com o escritório"
-      line="Conte a demanda no formulário. A mensagem entra na fila, de segunda a sexta, das 8h às 18h."
+      line="Conte a demanda no formulário. O escritório recebe de segunda a sexta, das 8h às 18h."
     />
     <Container className="py-16 md:py-24">
       <JsonLd data={breadcrumbSchema(crumbs)} />

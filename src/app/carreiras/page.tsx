@@ -27,7 +27,7 @@ export default function CareersPage() {
       crumbs={crumbs}
       kicker="Seleção"
       title="Envie o currículo"
-      line="Advogados, estagiários, correspondentes e apoio administrativo. O cadastro chega à equipe com o arquivo."
+      line="Advogados, estagiários, correspondentes e apoio administrativo. Envie o currículo pelo formulário."
     />
     <Container className="py-16 md:py-24">
       <JsonLd data={breadcrumbSchema(crumbs)} />

@@ -603,11 +603,58 @@
   min-width: 0;
 }
 
+.team-stage-band {
+  background: var(--color-paper);
+}
+
+.team-stage-frame {
+  border: 1px solid var(--color-line);
+}
+
+/* Gradiente só na base — sobre pernas/chão, sem cobrir rostos. */
+.team-stage-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 72%,
+    rgb(10 10 10 / 0.2) 82%,
+    rgb(10 10 10 / 0.7) 92%,
+    rgb(10 10 10 / 0.88) 100%
+  );
+}
+
+.team-stage-copy {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 0.85rem 1.1rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .team-stage-copy {
+    padding: 1.15rem 1.5rem 1.35rem;
+  }
+}
+
 .team-photo {
   position: absolute;
   inset: 0;
   transform-origin: center top;
   backface-visibility: hidden;
+  animation:
+    team-photo-in 520ms var(--ease-out) both,
+    drift 9s linear 520ms alternate infinite;
+}
+
+.hero-slide .team-photo {
+  animation: drift 9s linear alternate infinite;
+}
+
+.hero-slide.is-on .team-photo {
   animation:
     team-photo-in 520ms var(--ease-out) both,
     drift 9s linear 520ms alternate infinite;
@@ -1616,5 +1663,135 @@
     margin-top: 0;
     padding-left: 1.25rem;
   }
+}
+
+
+
+.juris-board {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.juris-board-glow {
+  position: absolute;
+  inset: -20% auto auto -10%;
+  width: min(42rem, 70vw);
+  height: min(42rem, 70vw);
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--color-seal) 38%, transparent) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.juris-nav {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.juris-arrow {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  background: transparent;
+  color: var(--color-gold);
+  transition:
+    color var(--duration-micro) var(--ease-standard),
+    border-color var(--duration-micro) var(--ease-standard),
+    background-color var(--duration-micro) var(--ease-standard),
+    opacity var(--duration-micro) var(--ease-standard);
+}
+
+.juris-arrow:hover:not(:disabled),
+.juris-arrow:focus-visible:not(:disabled) {
+  border-color: var(--color-gold);
+  color: var(--color-paper);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.juris-arrow:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+}
+
+.juris-tabs {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.juris-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: transparent;
+  padding: 0.7rem 1rem;
+  color: var(--color-gold-soft);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    color var(--duration-micro) var(--ease-standard),
+    background-color var(--duration-micro) var(--ease-standard),
+    border-color var(--duration-micro) var(--ease-standard);
+}
+
+.juris-tab:hover,
+.juris-tab:focus-visible {
+  border-color: var(--color-gold);
+  color: var(--color-paper);
+}
+
+.juris-tab.is-on {
+  border-color: var(--color-seal);
+  background: var(--color-seal);
+  color: var(--color-on-seal);
+}
+
+.juris-tab-count {
+  opacity: 0.72;
+  font-variant-numeric: tabular-nums;
+}
+
+.juris-tab.is-on .juris-tab-count {
+  opacity: 0.9;
+}
+
+.juris-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .juris-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.juris-card {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.04) 0%, transparent 48%),
+    color-mix(in srgb, var(--color-ink) 88%, white);
+  padding: 1.35rem 1.35rem 1.5rem;
+  transition:
+    border-color var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-out);
+}
+
+.juris-card:hover {
+  border-color: color-mix(in srgb, var(--color-gold) 55%, transparent);
+  transform: translateY(-2px);
 }
 
