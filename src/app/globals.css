@@ -492,8 +492,16 @@
 
 .imobiliario-band-photo {
   position: absolute;
-  inset: 0;
+  inset: -48% 0;
   z-index: 0;
+  transform: translate3d(0, 0, 0) scale(1.4);
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.imobiliario-band-photo img {
+  will-change: object-position;
 }
 
 .imobiliario-band-shade {
@@ -501,8 +509,21 @@
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--color-seal) 82%, transparent) 0%, color-mix(in srgb, var(--color-seal) 52%, transparent) 48%, color-mix(in srgb, var(--color-seal) 34%, transparent) 100%),
-    linear-gradient(180deg, color-mix(in srgb, var(--color-seal) 22%, transparent) 0%, transparent 42%, color-mix(in srgb, var(--color-ink) 28%, transparent) 100%);
+    linear-gradient(90deg, color-mix(in srgb, var(--color-seal) 68%, transparent) 0%, color-mix(in srgb, var(--color-seal) 38%, transparent) 52%, color-mix(in srgb, var(--color-seal) 22%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-seal) 16%, transparent) 0%, transparent 46%, color-mix(in srgb, var(--color-ink) 24%, transparent) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imobiliario-band-photo {
+    inset: 0;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .imobiliario-band-photo img {
+    object-position: center 40% !important;
+    will-change: auto;
+  }
 }
 
 .social-link svg {

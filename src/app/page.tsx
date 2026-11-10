@@ -1,11 +1,11 @@
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import { practiceAreas } from "@/content/areas";
 import { OfficeStage } from "@/components/site/office-stage";
 import { AreaCard } from "@/components/site/area-card";
 import { AreaMarquee } from "@/components/site/area-marquee";
 import { HeroStage } from "@/components/site/hero-stage";
+import { ImobiliarioBand } from "@/components/site/imobiliario-band";
 import { LogoRail } from "@/components/site/client-carousel";
 
 const NationalAttendance = dynamic(() =>
@@ -21,41 +21,7 @@ export default function HomePage() {
     <>
       <HeroStage />
       <AreaMarquee />
-
-      <section className="imobiliario-band" aria-labelledby="imobiliario-titulo">
-        <div className="imobiliario-band-photo" aria-hidden="true">
-          <Image
-            src="/areas/imobiliario-band.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            quality={92}
-            priority
-            className="object-cover object-[center_40%]"
-            draggable={false}
-          />
-        </div>
-        <div className="imobiliario-band-shade" aria-hidden="true" />
-        <Container className="relative z-10 grid items-end gap-10 py-16 md:grid-cols-[1.25fr_0.75fr] md:py-24">
-          <div>
-            <Eyebrow tone="gold">Itajaí / SC</Eyebrow>
-            <Heading level={2} id="imobiliario-titulo" className="mt-3 max-w-[14ch] text-on-seal">
-              Direito Imobiliário
-            </Heading>
-            <p className="mt-5 max-w-[42ch] text-lg text-on-seal">
-              Compra, venda, locação e registro. O escritório lê a matrícula, o contrato e a posse.
-            </p>
-            <div className="mt-8">
-              <Button href="/areas/direito-imobiliario" tone="gold">
-                Ver esta área
-              </Button>
-            </div>
-          </div>
-          <p className="max-w-[34ch] text-[17px] leading-[1.6] text-on-seal">
-            Em Itajaí, o imóvel atravessa a rotina da cidade. A orientação fica no contrato. O processo entra quando a disputa já existe.
-          </p>
-        </Container>
-      </section>
+      <ImobiliarioBand />
 
       <section id="areas" className="section-in scroll-mt-(--header-height) border-b border-line" aria-labelledby="areas-titulo">
         <Container className="py-16 md:py-24">
