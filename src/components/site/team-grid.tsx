@@ -28,7 +28,7 @@ function MemberCard({ member }: { member: TeamMember }) {
     <li className="team-card h-full">
       <Link href={`/equipe/${member.slug}`} className="group flex h-full flex-col">
         <div className="team-frame image-frame relative aspect-[4/5] bg-ink">
-          <Portrait member={member} sizes="(min-width: 1024px) 33vw, 50vw" />
+          <Portrait member={member} sizes="(min-width: 1024px) 28vw, (min-width: 640px) 40vw, 90vw" />
         </div>
         <p className="team-name mt-4 font-display text-xl leading-tight font-medium tracking-tight">{member.name}</p>
         <p className="mt-1 text-sm text-ink-soft">{member.role}</p>
@@ -63,7 +63,7 @@ export function TeamGrid() {
           className="team-lead group grid items-end gap-6 md:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] md:gap-10"
         >
           <div className="team-frame image-frame relative aspect-[4/5] bg-ink">
-            <Portrait member={lead} sizes="(min-width: 768px) 22rem, 100vw" />
+            <Portrait member={lead} sizes="(min-width: 768px) 28rem, 100vw" />
           </div>
           <div>
             <p className="text-xs font-semibold tracking-[0.14em] text-seal uppercase">{lead.role}</p>

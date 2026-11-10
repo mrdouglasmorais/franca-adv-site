@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { practiceAreas } from "@/content/areas";
 import { firm, nav } from "@/content/firm";
-import { oabByState, oabEntries } from "@/content/registrations";
+import { oabByState, oabSocietyEntries } from "@/content/registrations";
 import { BackToTopButton } from "@/components/site/back-to-top";
 import { WhatsAppMark } from "@/components/site/whatsapp-mark";
 import { SocialLinks } from "@/components/site/social-links";
@@ -15,7 +15,7 @@ const officeLinks = [
 ] as const;
 
 export function Footer() {
-  const groups = oabByState();
+  const groups = oabByState(oabSocietyEntries);
   const year = new Date().getFullYear();
 
   return (
@@ -42,8 +42,8 @@ export function Footer() {
               <dd className="mt-1 text-xs tracking-[0.08em] text-gold-soft uppercase">Início</dd>
             </div>
             <div>
-              <dt className="font-display text-2xl font-medium text-paper">{oabEntries.length}</dt>
-              <dd className="mt-1 text-xs tracking-[0.08em] text-gold-soft uppercase">Inscrições</dd>
+              <dt className="font-display text-2xl font-medium text-paper">{oabSocietyEntries.length}</dt>
+              <dd className="mt-1 text-xs tracking-[0.08em] text-gold-soft uppercase">Inscrição PJ</dd>
             </div>
             <div>
               <dt className="font-display text-2xl font-medium text-paper">{groups.length}</dt>

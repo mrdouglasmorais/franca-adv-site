@@ -54,7 +54,7 @@ export const firm = {
   entity: "Ferreira França Sociedade de Advocacia",
   cnpj: "52.426.341/0001-27",
   foundingYear: 2016,
-  sealLine: "Mais de 20 anos de atuação.",
+  sealLine: "Mais de 15 anos de atuação.",
   sealNote: "A equipe atende pessoas e empresas em Itajaí desde 2016.",
   address: {
     street: "Rua Lauro Muller, 853, sala 01",

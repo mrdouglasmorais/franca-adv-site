@@ -1,9 +1,5 @@
-import { ViewTransition } from "react";
+import { PageTransition } from "@/components/site/page-transition";
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  return (
-    <ViewTransition enter="page" exit="page">
-      {children}
-    </ViewTransition>
-  );
+  return <PageTransition>{children}</PageTransition>;
 }

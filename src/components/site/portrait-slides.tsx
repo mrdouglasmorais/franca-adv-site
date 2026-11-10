@@ -4,6 +4,16 @@ import Image from "next/image";
 import { SlideControls } from "@/components/site/slide-controls";
 import { useCarousel } from "@/components/site/use-carousel";
 
+/** Ajuste fino do enquadramento quando a foto tem espaço morto no topo. */
+const photoObjectClass: Record<string, string> = {
+  // Arquivo já no 4/5, cabelo colado ao topo.
+  "/team/maicon-2c.jpeg": "object-cover object-top",
+};
+
+function photoClass(src: string) {
+  return photoObjectClass[src] ?? "object-cover object-top";
+}
+
 export function PortraitSlides({
   photos,
   name,
@@ -30,7 +40,8 @@ export function PortraitSlides({
         fill
         priority={priority}
         sizes={sizes}
-        className="object-cover object-top"
+        quality={92}
+        className={photoClass(photos[0])}
         draggable={false}
       />
     );
@@ -62,7 +73,8 @@ export function PortraitSlides({
               fill
               priority={priority && itemIndex === 0}
               sizes={sizes}
-              className="object-cover object-top"
+              quality={92}
+              className={photoClass(src)}
               draggable={false}
             />
           </div>

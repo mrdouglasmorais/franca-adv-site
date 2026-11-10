@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { practiceAreas } from "@/content/areas";
 import { OfficeStage } from "@/components/site/office-stage";
@@ -21,8 +22,21 @@ export default function HomePage() {
       <HeroStage />
       <AreaMarquee />
 
-      <section className="border-b border-line bg-seal text-on-seal" aria-labelledby="imobiliario-titulo">
-        <Container className="grid items-end gap-10 py-16 md:grid-cols-[1.25fr_0.75fr] md:py-24">
+      <section className="imobiliario-band" aria-labelledby="imobiliario-titulo">
+        <div className="imobiliario-band-photo" aria-hidden="true">
+          <Image
+            src="/areas/imobiliario-band.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={92}
+            priority
+            className="object-cover object-[center_40%]"
+            draggable={false}
+          />
+        </div>
+        <div className="imobiliario-band-shade" aria-hidden="true" />
+        <Container className="relative z-10 grid items-end gap-10 py-16 md:grid-cols-[1.25fr_0.75fr] md:py-24">
           <div>
             <Eyebrow tone="gold">Itajaí / SC</Eyebrow>
             <Heading level={2} id="imobiliario-titulo" className="mt-3 max-w-[14ch] text-on-seal">

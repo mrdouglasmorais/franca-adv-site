@@ -37,10 +37,11 @@ export function HeroStage() {
                   src={item.src}
                   alt=""
                   fill
-                  priority={itemIndex === 0 && carousel.index === 0}
-                  loading={itemIndex === 0 && carousel.index === 0 ? undefined : current ? "eager" : "lazy"}
+                  priority={itemIndex === 0}
+                  loading={itemIndex === 0 ? undefined : "eager"}
                   sizes="100vw"
                   className="object-cover"
+                  fetchPriority={itemIndex === 0 ? "high" : current ? "high" : "auto"}
                   draggable={false}
                 />
               </div>
@@ -50,9 +51,13 @@ export function HeroStage() {
         <div className="hero-shade" />
       </div>
 
-      <div className="hero-seal">
+      <div
+        className="hero-seal"
+        tabIndex={0}
+        aria-label={`${firm.sealLine} ${firm.sealNote}`}
+      >
         <Image
-          src="/seal/seal.png"
+          src="/seal/excelencia.png"
           alt=""
           width={1254}
           height={1254}

@@ -40,9 +40,12 @@ export const oabEntries: readonly OabEntry[] = [
   },
 ];
 
-export function oabByState() {
+/** Inscrição da sociedade (PJ). Pessoas físicas ficam nas páginas da equipe. */
+export const oabSocietyEntries = oabEntries.filter((entry) => entry.number.startsWith("PJ"));
+
+export function oabByState(entries: readonly OabEntry[] = oabEntries) {
   const groups = new Map<string, { uf: string; state: string; entries: OabEntry[] }>();
-  for (const entry of oabEntries) {
+  for (const entry of entries) {
     const current = groups.get(entry.uf) ?? { uf: entry.uf, state: entry.state, entries: [] };
     current.entries.push(entry);
     groups.set(entry.uf, current);

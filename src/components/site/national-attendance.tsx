@@ -5,7 +5,7 @@ import type { FeatureCollection } from "geojson";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import statesGeo from "@/content/brazil-states.json";
 import { firm } from "@/content/firm";
-import { oabEntries } from "@/content/registrations";
+import { oabSocietyEntries } from "@/content/registrations";
 import { attendanceMode, brazilStates, principalUfs, type AttendanceMode } from "@/content/states";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -119,17 +119,16 @@ export function NationalAttendance() {
               <h3 className="mt-4 font-display text-2xl font-medium tracking-tight">{modeTitle(mode)}</h3>
               <p className="mt-3 max-w-[42ch] text-ink-soft">{modeText(mode, selected.name)}</p>
             </div>
-            <div>
-              <p className="text-xs font-semibold tracking-[0.14em] text-seal uppercase">Inscrições vigentes</p>
-              <ul className="mt-3 space-y-1.5 text-sm">
-                {oabEntries.map((entry) => (
+            {oabSocietyEntries.length ? (
+              <ul className="space-y-1.5 text-sm">
+                {oabSocietyEntries.map((entry) => (
                   <li key={entry.number}>
                     OAB/{entry.uf} {entry.number}
                     <span className="text-ink-soft"> — {entry.holder}</span>
                   </li>
                 ))}
               </ul>
-            </div>
+            ) : null}
             <Button href="/contato" pill>
               Falar com o escritório
             </Button>

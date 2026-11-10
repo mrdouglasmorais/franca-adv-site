@@ -55,7 +55,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-imobiliario",
     name: "Direito Imobiliário",
-    image: "/areas/imobiliario.jpg",
+    image: "/areas/imobiliario-v2.jpg",
     summary: "Compra, venda, locação, posse e o que a matrícula registra.",
     lead: "Compra, venda, locação e o que a matrícula do imóvel registra.",
     context:
@@ -120,7 +120,7 @@ export const practiceAreas: readonly PracticeArea[] = [
   {
     slug: "direito-do-trabalho",
     name: "Direito do Trabalho",
-    image: "/areas/trabalho.jpg",
+    image: "/areas/trabalho-v2.jpg",
     summary: "Ações, rescisões, acidentes e passivos de quem emprega e de quem é empregado.",
     lead: "Ação, rescisão ou acidente, para empregado e para empregador.",
     context:
