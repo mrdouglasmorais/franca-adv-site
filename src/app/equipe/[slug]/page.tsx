@@ -25,10 +25,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const member = getTeamMember(slug);
   if (!member) return {};
   const oab = member.oab ? ` ${member.oab}.` : "";
+  const photo = member.photos?.[0];
   return buildMetadata({
     title: member.name,
     description: `${member.name}, ${member.role} na Ferreira França Advogados em Itajaí/SC.${oab}`,
     path: `/equipe/${member.slug}`,
+    ...(photo
+      ? {
+          image: photo,
+          imageAlt: `${member.name}, ${member.role}`,
+        }
+      : {}),
   });
 }
 
@@ -48,23 +55,24 @@ export default async function TeamMemberPage({ params }: Props) {
       <JsonLd data={personSchema(member)} />
       <JsonLd data={breadcrumbSchema(crumbs)} />
       <Breadcrumb items={crumbs} />
-      <div className="mt-10 grid items-start gap-10 md:grid-cols-[minmax(16rem,22rem)_1fr]">
-        <div className="image-frame relative aspect-[4/5] overflow-hidden bg-ink">
-          {member.photos?.length ? (
-            <PortraitSlides
-              photos={member.photos}
-              name={member.name}
-              controls={member.photos.length > 1}
-              sizes="(min-width: 768px) 22rem, 100vw"
-              priority
-            />
-          ) : (
+      <div className="mt-10 space-y-10">
+        {member.photos?.length ? (
+          <PortraitSlides
+            photos={member.photos}
+            name={member.name}
+            controls={member.photos.length > 1}
+            sizes="(min-width: 1120px) 70rem, 100vw"
+            priority
+            className="w-full max-w-[70rem]"
+          />
+        ) : (
+          <div className="image-frame relative aspect-[4/5] w-full max-w-[28rem] overflow-hidden bg-ink">
             <div className="grid h-full place-items-center text-gold-soft">
               <span className="font-display text-7xl font-medium tracking-tight">{initialsOf(member.name)}</span>
             </div>
-          )}
-        </div>
-        <div>
+          </div>
+        )}
+        <div className="max-w-[42rem]">
           <Eyebrow tone="seal">{firm.address.city} / {firm.address.region}</Eyebrow>
           <Heading level={1} className="mt-3 max-w-[16ch]">
             {member.name}

@@ -6,6 +6,7 @@ function Portrait({ member, sizes }: { member: TeamMember; sizes: string }) {
   if (member.photos?.length) {
     return (
       <PortraitSlides
+        className="team-frame"
         photos={member.photos}
         name={member.name}
         labelled={false}
@@ -15,10 +16,12 @@ function Portrait({ member, sizes }: { member: TeamMember; sizes: string }) {
   }
 
   return (
-    <div className="grid h-full place-items-center bg-ink text-gold-soft">
-      <span className="team-portrait font-display text-5xl font-medium tracking-tight" aria-hidden="true">
-        {initialsOf(member.name)}
-      </span>
+    <div className="team-frame image-frame relative aspect-[4/5] bg-ink">
+      <div className="grid h-full place-items-center text-gold-soft">
+        <span className="team-portrait font-display text-5xl font-medium tracking-tight" aria-hidden="true">
+          {initialsOf(member.name)}
+        </span>
+      </div>
     </div>
   );
 }
@@ -27,9 +30,7 @@ function MemberCard({ member }: { member: TeamMember }) {
   return (
     <li className="team-card h-full">
       <Link href={`/equipe/${member.slug}`} className="group flex h-full flex-col">
-        <div className="team-frame image-frame relative aspect-[4/5] bg-ink">
-          <Portrait member={member} sizes="(min-width: 1024px) 28vw, (min-width: 640px) 40vw, 90vw" />
-        </div>
+        <Portrait member={member} sizes="(min-width: 1024px) 28vw, (min-width: 640px) 40vw, 90vw" />
         <p className="team-name mt-4 font-display text-xl leading-tight font-medium tracking-tight">{member.name}</p>
         <p className="mt-1 text-sm text-ink-soft">{member.role}</p>
         {member.curriculum?.focus.length ? (
@@ -60,11 +61,9 @@ export function TeamGrid() {
       {lead ? (
         <Link
           href={`/equipe/${lead.slug}`}
-          className="team-lead group grid items-end gap-6 md:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] md:gap-10"
+          className="team-lead group grid items-end gap-6 md:grid-cols-[minmax(16rem,28rem)_minmax(0,1fr)] md:gap-10"
         >
-          <div className="team-frame image-frame relative aspect-[4/5] bg-ink">
-            <Portrait member={lead} sizes="(min-width: 768px) 28rem, 100vw" />
-          </div>
+          <Portrait member={lead} sizes="(min-width: 768px) 28rem, 100vw" />
           <div>
             <p className="text-xs font-semibold tracking-[0.14em] text-seal uppercase">{lead.role}</p>
             <p className="team-name mt-3 font-display text-[clamp(2rem,4vw,3.25rem)] leading-[1.05] font-medium tracking-[-0.03em]">

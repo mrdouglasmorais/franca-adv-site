@@ -6,6 +6,9 @@ type BuildMetadataInput = {
   description: string;
   path?: string;
   absoluteTitle?: boolean;
+  /** Caminho público da imagem OG (ex.: foto do integrante). */
+  image?: string;
+  imageAlt?: string;
 };
 
 function absoluteUrl(path: string) {
@@ -18,9 +21,18 @@ export function buildMetadata({
   description,
   path = "/",
   absoluteTitle = false,
+  image,
+  imageAlt,
 }: BuildMetadataInput): Metadata {
   const url = absoluteUrl(path);
   const resolvedTitle = absoluteTitle ? title : `${title} | ${firm.shortName}`;
+  const ogImage = {
+    url: absoluteUrl(image ?? "/opengraph-image"),
+    width: 1200,
+    height: 630,
+    alt: imageAlt ?? firm.seo.ogImageAlt,
+    ...(image ? {} : { type: "image/png" as const }),
+  };
 
   return {
     title: absoluteTitle ? { absolute: resolvedTitle } : title,
@@ -37,15 +49,7 @@ export function buildMetadata({
       siteName: firm.name,
       locale: "pt_BR",
       type: "website",
-      images: [
-        {
-          url: absoluteUrl("/opengraph-image"),
-          width: 1200,
-          height: 630,
-          alt: firm.seo.ogImageAlt,
-          type: "image/png",
-        },
-      ],
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
@@ -53,10 +57,10 @@ export function buildMetadata({
       description,
       images: [
         {
-          url: absoluteUrl("/opengraph-image"),
-          width: 1200,
-          height: 630,
-          alt: firm.seo.ogImageAlt,
+          url: ogImage.url,
+          width: ogImage.width,
+          height: ogImage.height,
+          alt: ogImage.alt,
         },
       ],
     },

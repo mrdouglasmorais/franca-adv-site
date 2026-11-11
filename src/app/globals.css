@@ -341,6 +341,10 @@
   transition: transform 420ms var(--ease-out);
 }
 
+.portrait-slides {
+  transition: aspect-ratio 420ms var(--ease-out);
+}
+
 .group:hover .team-frame,
 .group:focus-visible .team-frame {
   transform: scale(1.045);

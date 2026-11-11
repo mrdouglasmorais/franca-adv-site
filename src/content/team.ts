@@ -35,7 +35,7 @@ export const team: readonly TeamMember[] = [
     name: "Maicon Ferreira França",
     role: "Fundador e CEO",
     oab: "OAB/SC 52540",
-    photos: ["/team/maicon-1.jpeg", "/team/maicon-2c.jpeg"],
+    photos: ["/team/dr-Maicon/a.jpeg", "/team/dr-Maicon/b.jpeg", "/team/dr-Maicon/c.jpeg"],
     summary:
       "Fundador do escritório. Graduado em Direito e Administração pela UNIVALI, com pós-graduação em Direito Empresarial e Direito Civil.",
     paragraphs: [
