@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const member = getTeamMember(slug);
   if (!member) return {};
   const oab = member.oab ? ` ${member.oab}.` : "";
-  const photo = member.photos?.[0];
+  const photo = member.cover ?? member.photos?.[0];
   return buildMetadata({
     title: member.name,
     description: `${member.name}, ${member.role} na Ferreira França Advogados em Itajaí/SC.${oab}`,

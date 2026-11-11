@@ -3,11 +3,12 @@ import { initialsOf, team, type TeamMember } from "@/content/team";
 import { PortraitSlides } from "@/components/site/portrait-slides";
 
 function Portrait({ member, sizes }: { member: TeamMember; sizes: string }) {
-  if (member.photos?.length) {
+  const listPhotos = member.cover ? [member.cover] : member.photos;
+  if (listPhotos?.length) {
     return (
       <PortraitSlides
         className="team-frame"
-        photos={member.photos}
+        photos={listPhotos}
         name={member.name}
         labelled={false}
         sizes={sizes}

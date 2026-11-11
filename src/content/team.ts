@@ -25,6 +25,9 @@ export type TeamMember = {
   oab?: string;
   summary: string;
   paragraphs: readonly string[];
+  /** Foto única na listagem (home /equipe). */
+  cover?: string;
+  /** Galeria na página dedicada. */
   photos?: readonly string[];
   curriculum?: Curriculum;
 };
@@ -35,7 +38,8 @@ export const team: readonly TeamMember[] = [
     name: "Maicon Ferreira França",
     role: "Fundador e CEO",
     oab: "OAB/SC 52540",
-    photos: ["/team/dr-Maicon/a.jpeg", "/team/dr-Maicon/b.jpeg", "/team/dr-Maicon/c.jpeg"],
+    cover: "/team/dr-Maicon/c.jpeg",
+    photos: ["/team/dr-Maicon/c.jpeg", "/team/dr-Maicon/a.jpeg", "/team/dr-Maicon/b.jpeg"],
     summary:
       "Fundador do escritório. Graduado em Direito e Administração pela UNIVALI, com pós-graduação em Direito Empresarial e Direito Civil.",
     paragraphs: [

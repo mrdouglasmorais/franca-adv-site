@@ -338,7 +338,9 @@
 }
 
 .team-frame {
-  transition: transform 420ms var(--ease-out);
+  transition:
+    transform 220ms var(--ease-out),
+    opacity 180ms var(--ease-standard);
 }
 
 .portrait-slides {
@@ -347,20 +349,24 @@
 
 .group:hover .team-frame,
 .group:focus-visible .team-frame {
-  transform: scale(1.045);
+  transform: scale(1.02);
+  opacity: 0.97;
 }
 
 .team-portrait {
-  transition: transform 420ms var(--ease-out);
+  transition:
+    transform 220ms var(--ease-out),
+    color 180ms var(--ease-standard);
 }
 
 .group:hover .team-portrait,
 .group:focus-visible .team-portrait {
-  transform: scale(1.08);
+  transform: scale(1.03);
+  color: var(--color-gold);
 }
 
 .team-name {
-  transition: color 180ms var(--ease-out);
+  transition: color 180ms var(--ease-standard);
 }
 
 .group:hover .team-name,
@@ -370,12 +376,12 @@
 
 .team-card-arrow {
   display: inline-block;
-  transition: transform 180ms var(--ease-out);
+  transition: transform 180ms var(--ease-standard);
 }
 
 .group:hover .team-card-arrow,
 .group:focus-visible .team-card-arrow {
-  transform: translateX(4px);
+  transform: translateX(3px);
 }
 
 .image-frame {
